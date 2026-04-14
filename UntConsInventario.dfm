@@ -1,0 +1,109 @@
+object FrmConsInventario: TFrmConsInventario
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = bsNone
+  Caption = 'ConsInventario'
+  ClientHeight = 680
+  ClientWidth = 800
+  Color = clBtnFace
+  DefaultMonitor = dmMainForm
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pageConsInventario: TcxPageControl
+    Left = 0
+    Top = 0
+    Width = 800
+    Height = 680
+    Align = alClient
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    Properties.ActivePage = TabConsInventario
+    Properties.CloseButtonMode = cbmActiveTab
+    Properties.CustomButtons.Buttons = <>
+    Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradient, pcoGradientClientArea, pcoRedrawOnResize, pcoUsePageColorForTab]
+    Properties.TabSlants.Kind = skCutCorner
+    Properties.TabSlants.Positions = [spRight]
+    LookAndFeel.Kind = lfUltraFlat
+    LookAndFeel.NativeStyle = False
+    LookAndFeel.SkinName = 'Caramel'
+    TabSlants.Kind = skCutCorner
+    TabSlants.Positions = [spRight]
+    OnCanCloseEx = pageConsInventarioCanCloseEx
+    ClientRectBottom = 673
+    ClientRectLeft = 4
+    ClientRectRight = 793
+    ClientRectTop = 28
+    object TabConsInventario: TcxTabSheet
+      Caption = 'Cons Inventario'
+      ImageIndex = 0
+      object BtnMovInventario: TcxButton
+        Left = 41
+        Top = 60
+        Width = 136
+        Height = 85
+        Hint = 'Movimiento de Inventarios'
+        ParentCustomHint = False
+        BiDiMode = bdLeftToRight
+        Caption = 'Movimiento Inventario'
+        LookAndFeel.Kind = lfOffice11
+        LookAndFeel.NativeStyle = False
+        LookAndFeel.SkinName = 'LondonLiquidSky'
+        OptionsImage.ImageIndex = 18
+        OptionsImage.Images = DmGlobal.ImlBotones
+        OptionsImage.Layout = blGlyphTop
+        ParentBiDiMode = False
+        ParentShowHint = False
+        PopupAlignment = paRight
+        ShowHint = True
+        TabOrder = 0
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = BtnMovInventarioClick
+      end
+      object BtnConsStock: TcxButton
+        Left = 225
+        Top = 60
+        Width = 136
+        Height = 85
+        Hint = 'Saldos Stock'
+        ParentCustomHint = False
+        BiDiMode = bdLeftToRight
+        Caption = 'Stock'
+        LookAndFeel.Kind = lfOffice11
+        LookAndFeel.NativeStyle = False
+        LookAndFeel.SkinName = 'LondonLiquidSky'
+        OptionsImage.ImageIndex = 19
+        OptionsImage.Images = DmGlobal.ImlBotones
+        OptionsImage.Layout = blGlyphTop
+        ParentBiDiMode = False
+        ParentShowHint = False
+        PopupAlignment = paRight
+        ShowHint = True
+        TabOrder = 1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = BtnConsStockClick
+      end
+    end
+  end
+end
