@@ -5,7 +5,7 @@ node_modules/
 # Build outputs
 dist/
 build/
-target/
+coverage/
 
 # Environment variables
 .env
@@ -19,25 +19,20 @@ target/
 *.swo
 *.tmp
 
-# Logs
-*.log
-
-# Python cache (if any Python files exist in project)
+# Python artifacts (if any Python files exist in project)
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py.class
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
+# Logs
+*.log
 
-# Prisma (database)
-prisma/migrations/
-*.db
-*.db-journal
+# OS generated files
+.DS_Store
+Thumbs.db
 
-# TypeScript
+# TypeScript/JavaScript build artifacts
 *.tsbuildinfo
 ```
