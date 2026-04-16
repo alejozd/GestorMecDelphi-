@@ -187,8 +187,8 @@ model Vehiculo {
   modelo            Int?            // Año del vehículo
   motor             String?         @db.VarChar(30) // Número de motor
   chasis            String?         @db.VarChar(50) // Número de chasis
-  kilómetro_inicial Decimal?        @db.Decimal(10, 2)
-  kilómetro_actual  Decimal?        @db.Decimal(10, 2)
+  kilometro_inicial Decimal?        @db.Decimal(10, 2)
+  kilometro_actual  Decimal?        @db.Decimal(10, 2)
   ordenesTrabajo    OrdenTrabajo[]
   createdAt         DateTime        @default(now()) @map("created_at")
   updatedAt         DateTime        @updatedAt @map("updated_at")
@@ -369,8 +369,7 @@ model OrdenTrabajo {
 model OrdenDetalle {
   otm_codi          Int
   orden             OrdenTrabajo       @relation(fields: [otm_codi], references: [otm_codi], onDelete: Cascade)
-  otd_cont          Int                @default(autoincrement())
-  pr_codi           Int
+  otd_cont          Int                @default(1)
   producto          Producto           @relation(fields: [pr_codi], references: [pro_codi])
   pr_codi           Int
   otd_cantidad      Decimal            @db.Decimal(10, 2)
@@ -418,8 +417,7 @@ model Entrada {
 model EntradaDetalle {
   ent_codi          Int
   entrada           Entrada            @relation(fields: [ent_codi], references: [ent_codi], onDelete: Cascade)
-  end_cont          Int                @default(autoincrement())
-  pro_codi          Int
+  end_cont          Int                @default(1)
   producto          Producto           @relation(fields: [pro_codi], references: [pro_codi])
   pro_codi          Int
   end_cantidad      Decimal            @db.Decimal(10, 2)
@@ -446,12 +444,10 @@ model MovimientoInventario {
   mvi_num_docu      Int                // Número del documento origen
   mvi_fecha_docu    DateTime
   mvi_fecha_reg     DateTime           @default(now())
-  pro_codi          Int
   producto          Producto           @relation(fields: [pro_codi], references: [pro_codi])
   pro_codi          Int
   mvi_cantidad      Decimal            @db.Decimal(10, 2)
   mvi_costo_unit    Decimal?           @db.Decimal(10, 2) // Costo unitario del movimiento
-  bod_codi          Int
   bodega            Bodega             @relation(fields: [bod_codi], references: [bod_codi])
   bod_codi          Int
   usu_codi          Int?               // Usuario que registró el movimiento
