@@ -242,7 +242,7 @@ INSERT INTO entrada (ent_nume, prv_codi, ent_fecha, ent_observaciones, ent_subto
 (5003, 3, '2025-01-08 09:00:00', 'Compra de sistema de frenos', 3000000.00, 570000.00, 3570000.00, '2025-01-08 09:00:00');
 
 -- Detalles de entradas
-INSERT INTO entrada_detalle (ent_codi, pr_codi, ed_cont, ed_cantidad, ed_costo_unit, ed_sbtotal, ed_por_iva, ed_vr_iva, ed_vr_total, bod_codi, ed_observacion) VALUES
+INSERT INTO entrada_detalle (ent_codi, pro_codi, end_cont, end_cantidad, end_precio, end_sbtotal, end_por_iva, end_vr_iva, end_vr_total, bod_codi, end_observacion) VALUES
 -- Entrada 5001
 (1, 1, 1, 50.00, 55000.00, 2750000.00, 19.00, 522500.00, 3272500.00, 1, 'Aceite 5W30'),
 (1, 3, 2, 30.00, 20000.00, 600000.00, 19.00, 114000.00, 714000.00, 1, 'Filtros aceite'),
@@ -258,17 +258,14 @@ INSERT INTO entrada_detalle (ent_codi, pr_codi, ed_cont, ed_cantidad, ed_costo_u
 -- 8. MOVIMIENTOS DE INVENTARIO
 -- ============================================
 
-INSERT INTO movimientos_inv (mov_tipo, mov_fecha, pr_codi, bod_codi, mov_cantidad, mov_costo, mov_valor_total, mov_observacion, usu_codi, ent_codi, otm_codi) VALUES
-('E', '2025-01-05 10:00:00', 1, 1, 50.00, 55000.00, 2750000.00, 'Entrada por compra 5001', NULL, 1, NULL),
-('E', '2025-01-05 10:00:00', 3, 1, 30.00, 20000.00, 600000.00, 'Entrada por compra 5001', NULL, 1, NULL),
-('E', '2025-01-05 10:00:00', 5, 1, 20.00, 75000.00, 1500000.00, 'Entrada por compra 5001', NULL, 1, NULL),
-('E', '2025-01-05 10:00:00', 9, 1, 30.00, 28000.00, 840000.00, 'Entrada por compra 5001', NULL, 1, NULL),
-('E', '2025-01-06 11:30:00', 2, 1, 80.00, 28000.00, 2240000.00, 'Entrada por compra 5002', NULL, 2, NULL),
-('E', '2025-01-08 09:00:00', 6, 1, 10.00, 110000.00, 1100000.00, 'Entrada por compra 5003', NULL, 3, NULL),
-('E', '2025-01-08 09:00:00', 13, 1, 20.00, 22000.00, 440000.00, 'Entrada por compra 5003', NULL, 3, NULL),
-('S', '2025-01-10 08:30:00', 1, 1, -4.00, 55000.00, -220000.00, 'Salida por orden 1001', NULL, NULL, 1),
-('S', '2025-01-10 08:30:00', 3, 1, -1.00, 20000.00, -20000.00, 'Salida por orden 1001', NULL, NULL, 1),
-('S', '2025-01-10 08:30:00', 4, 1, -1.00, 15000.00, -15000.00, 'Salida por orden 1001', NULL, NULL, 1);
+INSERT INTO movimientos_inventario (mvi_clase_docu, mvi_fecha_docu, pro_codi, bod_codi, mvi_cantidad, mvi_costo_unit, mvi_observacion, usu_codi, ent_codi) VALUES
+(0, '2025-01-05 10:00:00', 1, 1, 50.00, 55000.00, 'Entrada por compra 5001', NULL, 1),
+(0, '2025-01-05 10:00:00', 3, 1, 30.00, 20000.00, 'Entrada por compra 5001', NULL, 1),
+(0, '2025-01-05 10:00:00', 5, 1, 20.00, 75000.00, 'Entrada por compra 5001', NULL, 1),
+(0, '2025-01-05 10:00:00', 9, 1, 30.00, 28000.00, 'Entrada por compra 5001', NULL, 1),
+(0, '2025-01-06 11:30:00', 2, 1, 80.00, 28000.00, 'Entrada por compra 5002', NULL, 2),
+(0, '2025-01-08 09:00:00', 6, 1, 10.00, 110000.00, 'Entrada por compra 5003', NULL, 3),
+(0, '2025-01-08 09:00:00', 13, 1, 20.00, 22000.00, 'Entrada por compra 5003', NULL, 3);
 
 -- ============================================
 -- FIN DATOS DE PRUEBA

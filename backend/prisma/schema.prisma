@@ -18,19 +18,19 @@ datasource db {
 
 /// Usuario del sistema con acceso autenticado
 model Usuario {
-  usu_codi          Int       @id @default(autoincrement())
-  usuario           String    @unique @db.VarChar(50)
-  password          String    @db.VarChar(255) // bcrypt hash
-  nombre            String    @db.VarChar(100)
-  correo            String?   @db.VarChar(100)
-  telefono          String?   @db.VarChar(20)
-  estado            Int       @default(1) // 1=Activo, 0=Inactivo
-  rol               Rol       @relation(fields: [rol_codi], references: [rol_codi])
-  rol_codi          Int
-  permisos          Permiso[]
-  ordenesTrabajo    OrdenTrabajo[] // Órdenes asignadas al usuario
-  createdAt         DateTime  @default(now()) @map("created_at")
-  updatedAt         DateTime  @updatedAt @map("updated_at")
+  usu_codi       Int            @id @default(autoincrement())
+  usuario        String         @unique @db.VarChar(50)
+  password       String         @db.VarChar(255) // bcrypt hash
+  nombre         String         @db.VarChar(100)
+  correo         String?        @db.VarChar(100)
+  telefono       String?        @db.VarChar(20)
+  estado         Int            @default(1) // 1=Activo, 0=Inactivo
+  rol            Rol            @relation(fields: [rol_codi], references: [rol_codi])
+  rol_codi       Int
+  permisos       Permiso[]
+  ordenesTrabajo OrdenTrabajo[] // Órdenes asignadas al usuario
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
 
   @@index([usuario])
   @@index([correo])
@@ -39,28 +39,28 @@ model Usuario {
 
 /// Roles del sistema (Administrador, Supervisor, Mecánico, Recepcionista, etc.)
 model Rol {
-  rol_codi          Int       @id @default(autoincrement())
-  rol_nombre        String    @unique @db.VarChar(60)
-  rol_descripcion   String?   @db.Text
-  usuarios          Usuario[]
-  permisosRol       PermisoRol[]
-  createdAt         DateTime  @default(now()) @map("created_at")
-  updatedAt         DateTime  @updatedAt @map("updated_at")
+  rol_codi        Int          @id @default(autoincrement())
+  rol_nombre      String       @unique @db.VarChar(60)
+  rol_descripcion String?      @db.Text
+  usuarios        Usuario[]
+  permisosRol     PermisoRol[]
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
 
   @@map("roles")
 }
 
 /// Permisos por rol y opción del menú
 model PermisoRol {
-  per_rol_codi      Int       @id @default(autoincrement())
-  rol               Rol       @relation(fields: [rol_codi], references: [rol_codi])
-  rol_codi          Int
-  per_opcion        Int       // ID del menú/opción (ej: 1=Clientes, 2=Inventario, etc.)
-  per_leer          Int       @default(0) // 1=Sí, 0=No
-  per_crear         Int       @default(0)
-  per_modificar     Int       @default(0)
-  per_borrar        Int       @default(0)
-  per_imprimir      Int       @default(0) // Permiso adicional para imprimir documentos
+  per_rol_codi  Int @id @default(autoincrement())
+  rol           Rol @relation(fields: [rol_codi], references: [rol_codi])
+  rol_codi      Int
+  per_opcion    Int // ID del menú/opción (ej: 1=Clientes, 2=Inventario, etc.)
+  per_leer      Int @default(0) // 1=Sí, 0=No
+  per_crear     Int @default(0)
+  per_modificar Int @default(0)
+  per_borrar    Int @default(0)
+  per_imprimir  Int @default(0) // Permiso adicional para imprimir documentos
 
   @@unique([rol_codi, per_opcion])
   @@map("permisos_rol")
@@ -68,15 +68,15 @@ model PermisoRol {
 
 /// Permisos individuales de usuario (sobrescriben los del rol)
 model Permiso {
-  per_codi          Int       @id @default(autoincrement())
-  usuario           Usuario   @relation(fields: [usu_codi], references: [usu_codi])
-  usu_codi          Int
-  per_opcion        Int       // ID del menú/opción
-  per_leer          Int       @default(0)
-  per_crear         Int       @default(0)
-  per_modificar     Int       @default(0)
-  per_borrar        Int       @default(0)
-  per_imprimir      Int       @default(0)
+  per_codi      Int     @id @default(autoincrement())
+  usuario       Usuario @relation(fields: [usu_codi], references: [usu_codi])
+  usu_codi      Int
+  per_opcion    Int // ID del menú/opción
+  per_leer      Int     @default(0)
+  per_crear     Int     @default(0)
+  per_modificar Int     @default(0)
+  per_borrar    Int     @default(0)
+  per_imprimir  Int     @default(0)
 
   @@unique([usu_codi, per_opcion])
   @@map("permisos")
@@ -88,12 +88,12 @@ model Permiso {
 
 /// Tipo de documento (CC, TI, NIT, RC, etc.)
 model TipoDocumento {
-  td_codi           Int           @id @default(autoincrement())
-  td_abreviado      String        @db.VarChar(20)
-  td_nombre         String        @db.VarChar(60)
-  clientes          Cliente[]
-  proveedores       Proveedor[]
-  empleados         Empleado[]
+  td_codi      Int         @id @default(autoincrement())
+  td_abreviado String      @db.VarChar(20)
+  td_nombre    String      @db.VarChar(60)
+  clientes     Cliente[]
+  proveedores  Proveedor[]
+  empleados    Empleado[]
 
   @@unique([td_abreviado])
   @@map("tipos_documento")
@@ -101,21 +101,21 @@ model TipoDocumento {
 
 /// Ciudad/Municipio
 model Ciudad {
-  ciu_codi          Int           @id @default(autoincrement())
-  ciu_nombre        String        @db.VarChar(60)
-  dep_codigo        Int?          // Código del departamento
-  clientes          Cliente[]
-  proveedores       Proveedor[]
-  empleados         Empleado[]
+  ciu_codi    Int         @id @default(autoincrement())
+  ciu_nombre  String      @db.VarChar(60)
+  dep_codigo  Int? // Código del departamento
+  clientes    Cliente[]
+  proveedores Proveedor[]
+  empleados   Empleado[]
 
   @@map("ciudades")
 }
 
 /// Cargo del empleado
 model Cargo {
-  cg_codi           Int           @id @default(autoincrement())
-  cg_nombre         String        @db.VarChar(60)
-  empleados         Empleado[]
+  cg_codi   Int        @id @default(autoincrement())
+  cg_nombre String     @db.VarChar(60)
+  empleados Empleado[]
 
   @@map("cargos")
 }
@@ -126,23 +126,23 @@ model Cargo {
 
 /// Cliente propietario de vehículos
 model Cliente {
-  cli_codi          Int             @id @default(autoincrement())
-  tipoDocumento     TipoDocumento   @relation(fields: [cod_tipdo], references: [td_codi])
-  cod_tipdo         Int
-  cli_numdoc        String          @db.VarChar(20)
-  cli_nombre        String          @db.VarChar(255)
-  cli_direccion     String?         @db.VarChar(255)
-  cli_barrio        String?         @db.VarChar(60)
-  cli_tel_movil     String?         @db.VarChar(20)
-  cli_tel_fijo      String?         @db.VarChar(20)
-  cli_correoe       String?         @db.VarChar(100)
-  ciudad            Ciudad?         @relation(fields: [ciu_codi], references: [ciu_codi])
-  ciu_codi          Int?
-  cli_observacion   String?         @db.Text
-  vehiculos         Vehiculo[]
-  ordenesTrabajo    OrdenTrabajo[]
-  createdAt         DateTime        @default(now()) @map("created_at")
-  updatedAt         DateTime        @updatedAt @map("updated_at")
+  cli_codi        Int            @id @default(autoincrement())
+  tipoDocumento   TipoDocumento  @relation(fields: [cod_tipdo], references: [td_codi])
+  cod_tipdo       Int
+  cli_numdoc      String         @db.VarChar(20)
+  cli_nombre      String         @db.VarChar(255)
+  cli_direccion   String?        @db.VarChar(255)
+  cli_barrio      String?        @db.VarChar(60)
+  cli_tel_movil   String?        @db.VarChar(20)
+  cli_tel_fijo    String?        @db.VarChar(20)
+  cli_correoe     String?        @db.VarChar(100)
+  ciudad          Ciudad?        @relation(fields: [ciu_codi], references: [ciu_codi])
+  ciu_codi        Int?
+  cli_observacion String?        @db.Text
+  vehiculos       Vehiculo[]
+  ordenesTrabajo  OrdenTrabajo[]
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
 
   @@unique([cod_tipdo, cli_numdoc])
   @@index([cli_nombre])
@@ -152,10 +152,10 @@ model Cliente {
 
 /// Marca de vehículo
 model MarcaVehiculo {
-  mr_codi           Int             @id @default(autoincrement())
-  mr_nombre         String          @db.VarChar(60)
-  lineas            LineaVehiculo[]
-  vehiculos         Vehiculo[]
+  mr_codi   Int             @id @default(autoincrement())
+  mr_nombre String          @db.VarChar(60)
+  lineas    LineaVehiculo[]
+  vehiculos Vehiculo[]
 
   @@unique([mr_nombre])
   @@map("marcas_vehiculo")
@@ -163,11 +163,11 @@ model MarcaVehiculo {
 
 /// Línea/Modelo de vehículo (relacionada con marca)
 model LineaVehiculo {
-  li_codi           Int             @id @default(autoincrement())
-  marca             MarcaVehiculo   @relation(fields: [mr_codi], references: [mr_codi])
-  mr_codi           Int
-  li_nombre         String          @db.VarChar(60)
-  vehiculos         Vehiculo[]
+  li_codi   Int           @id @default(autoincrement())
+  marca     MarcaVehiculo @relation(fields: [mr_codi], references: [mr_codi])
+  mr_codi   Int
+  li_nombre String        @db.VarChar(60)
+  vehiculos Vehiculo[]
 
   @@unique([mr_codi, li_nombre])
   @@map("lineas_vehiculo")
@@ -175,23 +175,23 @@ model LineaVehiculo {
 
 /// Vehículo asociado a un cliente
 model Vehiculo {
-  vxc_codi          Int             @id @default(autoincrement())
-  cliente           Cliente         @relation(fields: [cli_codi], references: [cli_codi])
+  vxc_codi          Int            @id @default(autoincrement())
+  cliente           Cliente        @relation(fields: [cli_codi], references: [cli_codi])
   cli_codi          Int
-  placa             String          @db.VarChar(20)
-  marca             MarcaVehiculo   @relation(fields: [mr_codi], references: [mr_codi])
+  placa             String         @db.VarChar(20)
+  marca             MarcaVehiculo  @relation(fields: [mr_codi], references: [mr_codi])
   mr_codi           Int
-  linea             LineaVehiculo   @relation(fields: [li_codi], references: [li_codi])
+  linea             LineaVehiculo  @relation(fields: [li_codi], references: [li_codi])
   li_codi           Int
-  color             String?         @db.VarChar(30)
-  modelo            Int?            // Año del vehículo
-  motor             String?         @db.VarChar(30) // Número de motor
-  chasis            String?         @db.VarChar(50) // Número de chasis
-  kilometro_inicial Decimal?        @db.Decimal(10, 2)
-  kilometro_actual  Decimal?        @db.Decimal(10, 2)
+  color             String?        @db.VarChar(30)
+  modelo            Int? // Año del vehículo
+  motor             String?        @db.VarChar(30) // Número de motor
+  chasis            String?        @db.VarChar(50) // Número de chasis
+  kilometro_inicial Decimal?       @db.Decimal(10, 2)
+  kilometro_actual  Decimal?       @db.Decimal(10, 2)
   ordenesTrabajo    OrdenTrabajo[]
-  createdAt         DateTime        @default(now()) @map("created_at")
-  updatedAt         DateTime        @updatedAt @map("updated_at")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
 
   @@unique([placa])
   @@index([cli_codi])
@@ -205,10 +205,10 @@ model Vehiculo {
 
 /// Grupo de inventario (categoría de productos)
 model GrupoInventario {
-  gru_codi          Int             @id @default(autoincrement())
-  gru_nombre        String          @db.VarChar(60)
-  gru_observacion   String?         @db.Text
-  productos         Producto[]
+  gru_codi        Int        @id @default(autoincrement())
+  gru_nombre      String     @db.VarChar(60)
+  gru_observacion String?    @db.Text
+  productos       Producto[]
 
   @@unique([gru_nombre])
   @@map("grupos_inv")
@@ -216,28 +216,28 @@ model GrupoInventario {
 
 /// Producto o Servicio del inventario
 model Producto {
-  pro_codi          Int              @id @default(autoincrement())
-  pro_nombre        String           @db.VarChar(100)
-  pro_descripcion   String?          @db.Text
-  pro_referencia    String?          @db.VarChar(50)
-  pro_cod_barras    String?          @db.VarChar(50) @unique
-  pro_precio        Decimal          @db.Decimal(10, 2)
-  pro_precio_costo  Decimal?         @db.Decimal(10, 2) // Precio de costo promedio
-  pro_maximo        Int?
-  pro_minimo        Int?
-  pro_iva           Decimal          @default(0) @db.Decimal(5, 2) // Porcentaje de IVA
-  pro_clase         Int              @default(0) // 0=Producto (con stock), 1=Servicio (sin stock)
-  pro_marca         String?          @db.VarChar(60)
-  pro_presentacion  String?          @db.VarChar(60) // Unidad de medida
-  pro_observacion   String?          @db.Text
-  grupo             GrupoInventario? @relation(fields: [gru_codi], references: [gru_codi])
-  gru_codi          Int?
-  stockBodegas      StockBodega[]
-  ordenesDetalle    OrdenDetalle[]
-  entradasDetalle   EntradaDetalle[]
-  movimientosInv    MovimientoInventario[]
-  createdAt         DateTime         @default(now()) @map("created_at")
-  updatedAt         DateTime         @updatedAt @map("updated_at")
+  pro_codi         Int                    @id @default(autoincrement())
+  pro_nombre       String                 @db.VarChar(100)
+  pro_descripcion  String?                @db.Text
+  pro_referencia   String?                @db.VarChar(50)
+  pro_cod_barras   String?                @unique @db.VarChar(50)
+  pro_precio       Decimal                @db.Decimal(10, 2)
+  pro_precio_costo Decimal?               @db.Decimal(10, 2) // Precio de costo promedio
+  pro_maximo       Int?
+  pro_minimo       Int?
+  pro_iva          Decimal                @default(0) @db.Decimal(5, 2) // Porcentaje de IVA
+  pro_clase        Int                    @default(0) // 0=Producto (con stock), 1=Servicio (sin stock)
+  pro_marca        String?                @db.VarChar(60)
+  pro_presentacion String?                @db.VarChar(60) // Unidad de medida
+  pro_observacion  String?                @db.Text
+  grupo            GrupoInventario?       @relation(fields: [gru_codi], references: [gru_codi])
+  gru_codi         Int?
+  stockBodegas     StockBodega[]
+  ordenesDetalle   OrdenDetalle[]
+  entradasDetalle  EntradaDetalle[]
+  movimientosInv   MovimientoInventario[]
+  createdAt        DateTime               @default(now()) @map("created_at")
+  updatedAt        DateTime               @updatedAt @map("updated_at")
 
   @@index([pro_nombre])
   @@index([pro_referencia])
@@ -246,14 +246,14 @@ model Producto {
 
 /// Bodega/Almacén para manejo de inventario múltiple
 model Bodega {
-  bod_codi          Int              @id @default(autoincrement())
-  bod_nombre        String           @db.VarChar(60)
-  bod_ubicacion     String?          @db.VarChar(100)
-  bod_observacion   String?          @db.Text
-  stockBodegas      StockBodega[]
-  entradasDetalle   EntradaDetalle[]
-  ordenesDetalle    OrdenDetalle[]
-  movimientosInv    MovimientoInventario[]
+  bod_codi        Int                    @id @default(autoincrement())
+  bod_nombre      String                 @db.VarChar(60)
+  bod_ubicacion   String?                @db.VarChar(100)
+  bod_observacion String?                @db.Text
+  stockBodegas    StockBodega[]
+  entradasDetalle EntradaDetalle[]
+  ordenesDetalle  OrdenDetalle[]
+  movimientosInv  MovimientoInventario[]
 
   @@unique([bod_nombre])
   @@map("bodegas")
@@ -261,13 +261,13 @@ model Bodega {
 
 /// Stock de producto por bodega
 model StockBodega {
-  producto          Producto         @relation(fields: [pro_codi], references: [pro_codi])
-  pro_codi          Int
-  bodega            Bodega           @relation(fields: [bod_codi], references: [bod_codi])
-  bod_codi          Int
-  st_cantidad       Decimal          @default(0) @db.Decimal(10, 2) // Cantidad disponible
-  st_reservada      Decimal          @default(0) @db.Decimal(10, 2) // Cantidad reservada (en órdenes en proceso)
-  saldo_real        Decimal          @default(0) @db.Decimal(10, 2) // Saldo físico real
+  producto     Producto @relation(fields: [pro_codi], references: [pro_codi])
+  pro_codi     Int
+  bodega       Bodega   @relation(fields: [bod_codi], references: [bod_codi])
+  bod_codi     Int
+  st_cantidad  Decimal  @default(0) @db.Decimal(10, 2) // Cantidad disponible
+  st_reservada Decimal  @default(0) @db.Decimal(10, 2) // Cantidad reservada (en órdenes en proceso)
+  saldo_real   Decimal  @default(0) @db.Decimal(10, 2) // Saldo físico real
 
   @@id([pro_codi, bod_codi])
   @@map("stock_bodega")
@@ -279,23 +279,23 @@ model StockBodega {
 
 /// Proveedor de productos/servicios
 model Proveedor {
-  prv_codi          Int             @id @default(autoincrement())
-  tipoDocumento     TipoDocumento   @relation(fields: [cod_tipdo], references: [td_codi])
+  prv_codi          Int           @id @default(autoincrement())
+  tipoDocumento     TipoDocumento @relation(fields: [cod_tipdo], references: [td_codi])
   cod_tipdo         Int
-  prv_numdoc        String          @db.VarChar(20)
-  prv_nombre        String          @db.VarChar(255)
-  prv_direccion     String?         @db.VarChar(255)
-  prv_barrio        String?         @db.VarChar(60)
-  prv_tel_movil     String?         @db.VarChar(20)
-  prv_tel_fijo      String?         @db.VarChar(20)
-  prv_correoe       String?         @db.VarChar(100)
-  prv_contacto      String?         @db.VarChar(100) // Persona de contacto
-  prv_observaciones String?         @db.Text
-  ciudad            Ciudad?         @relation(fields: [ciu_codi], references: [ciu_codi])
+  prv_numdoc        String        @db.VarChar(20)
+  prv_nombre        String        @db.VarChar(255)
+  prv_direccion     String?       @db.VarChar(255)
+  prv_barrio        String?       @db.VarChar(60)
+  prv_tel_movil     String?       @db.VarChar(20)
+  prv_tel_fijo      String?       @db.VarChar(20)
+  prv_correoe       String?       @db.VarChar(100)
+  prv_contacto      String?       @db.VarChar(100) // Persona de contacto
+  prv_observaciones String?       @db.Text
+  ciudad            Ciudad?       @relation(fields: [ciu_codi], references: [ciu_codi])
   ciu_codi          Int?
   entradas          Entrada[]
-  createdAt         DateTime        @default(now()) @map("created_at")
-  updatedAt         DateTime        @updatedAt @map("updated_at")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
 
   @@unique([cod_tipdo, prv_numdoc])
   @@index([prv_nombre])
@@ -304,25 +304,25 @@ model Proveedor {
 
 /// Empleado del taller
 model Empleado {
-  emp_codi          Int             @id @default(autoincrement())
-  tipoDocumento     TipoDocumento   @relation(fields: [cod_tipdo], references: [td_codi])
+  emp_codi          Int            @id @default(autoincrement())
+  tipoDocumento     TipoDocumento  @relation(fields: [cod_tipdo], references: [td_codi])
   cod_tipdo         Int
-  emp_numdoc        String          @db.VarChar(20)
-  emp_nombre        String          @db.VarChar(100)
-  emp_direccion     String?         @db.VarChar(100)
-  emp_barrio        String?         @db.VarChar(60)
-  emp_tel_movil     String?         @db.VarChar(20)
-  emp_tel_fijo      String?         @db.VarChar(20)
-  cargo             Cargo?          @relation(fields: [cg_codi], references: [cg_codi])
+  emp_numdoc        String         @db.VarChar(20)
+  emp_nombre        String         @db.VarChar(100)
+  emp_direccion     String?        @db.VarChar(100)
+  emp_barrio        String?        @db.VarChar(60)
+  emp_tel_movil     String?        @db.VarChar(20)
+  emp_tel_fijo      String?        @db.VarChar(20)
+  cargo             Cargo?         @relation(fields: [cg_codi], references: [cg_codi])
   cg_codi           Int?
-  ciudad            Ciudad?         @relation(fields: [ciu_codi], references: [ciu_codi])
+  ciudad            Ciudad?        @relation(fields: [ciu_codi], references: [ciu_codi])
   ciu_codi          Int?
-  emp_estado        String          @default("A") @db.VarChar(1) // A=Activo, I=Inactivo
+  emp_estado        String         @default("A") @db.VarChar(1) // A=Activo, I=Inactivo
   emp_fecha_ingreso DateTime?
-  emp_observacion   String?         @db.Text
+  emp_observacion   String?        @db.Text
   ordenesDetalle    OrdenDetalle[]
-  createdAt         DateTime        @default(now()) @map("created_at")
-  updatedAt         DateTime        @updatedAt @map("updated_at")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
 
   @@unique([cod_tipdo, emp_numdoc])
   @@index([emp_nombre])
@@ -335,28 +335,28 @@ model Empleado {
 
 /// Orden de Trabajo / Factura / Pedido
 model OrdenTrabajo {
-  otm_codi          Int                @id @default(autoincrement())
-  otm_clase_doc     Int                @default(0) // 0=Orden, 1=Factura, 2=Pedido/Recibo
-  otm_nume          Int                @unique // Consecutivo del documento
-  cliente           Cliente            @relation(fields: [cli_codi], references: [cli_codi])
-  cli_codi          Int
-  vehiculo          Vehiculo?          @relation(fields: [vxc_codi], references: [vxc_codi])
-  vxc_codi          Int?
-  usuario           Usuario?           @relation(fields: [usu_codi], references: [usu_codi])
-  usu_codi          Int?
-  otm_fecha         DateTime           @default(now())
-  otm_fecha_vence   DateTime?
-  otm_kilometraje   String?            @db.VarChar(20)
-  otm_observacion   String?            @db.Text
-  otm_subtotal      Decimal            @default(0) @db.Decimal(10, 2)
-  otm_vr_iva        Decimal            @default(0) @db.Decimal(10, 2)
-  otm_vr_desc       Decimal            @default(0) @db.Decimal(10, 2)
-  otm_vr_total      Decimal            @default(0) @db.Decimal(10, 2)
-  fp_codi           Int?               // Forma de pago (para futura implementación)
-  otm_estado        Int                @default(0) // 0=En Proceso, 1=Finalizado, 2=Anulado
-  detalles          OrdenDetalle[]
-  createdAt         DateTime           @default(now()) @map("created_at")
-  updatedAt         DateTime           @updatedAt @map("updated_at")
+  otm_codi        Int            @id @default(autoincrement())
+  otm_clase_doc   Int            @default(0) // 0=Orden, 1=Factura, 2=Pedido/Recibo
+  otm_nume        Int            @unique // Consecutivo del documento
+  cliente         Cliente        @relation(fields: [cli_codi], references: [cli_codi])
+  cli_codi        Int
+  vehiculo        Vehiculo?      @relation(fields: [vxc_codi], references: [vxc_codi])
+  vxc_codi        Int?
+  usuario         Usuario?       @relation(fields: [usu_codi], references: [usu_codi])
+  usu_codi        Int?
+  otm_fecha       DateTime       @default(now())
+  otm_fecha_vence DateTime?
+  otm_kilometraje String?        @db.VarChar(20)
+  otm_observacion String?        @db.Text
+  otm_subtotal    Decimal        @default(0) @db.Decimal(10, 2)
+  otm_vr_iva      Decimal        @default(0) @db.Decimal(10, 2)
+  otm_vr_desc     Decimal        @default(0) @db.Decimal(10, 2)
+  otm_vr_total    Decimal        @default(0) @db.Decimal(10, 2)
+  fp_codi         Int? // Forma de pago (para futura implementación)
+  otm_estado      Int            @default(0) // 0=En Proceso, 1=Finalizado, 2=Anulado
+  detalles        OrdenDetalle[]
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
 
   @@index([cli_codi])
   @@index([vxc_codi])
@@ -367,24 +367,24 @@ model OrdenTrabajo {
 
 /// Detalle de ítems de la orden de trabajo
 model OrdenDetalle {
-  otm_codi          Int
-  orden             OrdenTrabajo       @relation(fields: [otm_codi], references: [otm_codi], onDelete: Cascade)
-  otd_cont          Int                @default(1)
-  producto          Producto           @relation(fields: [pr_codi], references: [pro_codi])
-  pr_codi           Int
-  otd_cantidad      Decimal            @db.Decimal(10, 2)
-  otd_precio        Decimal            @db.Decimal(10, 2)
-  otd_sbtotal       Decimal            @db.Decimal(10, 2) // Subtotal línea (cantidad * precio)
-  otd_por_iva       Decimal            @db.Decimal(5, 2)  // % IVA aplicado (puede ser 0 si es pedido)
-  otd_vr_iva        Decimal            @db.Decimal(10, 2) // Valor IVA de la línea
-  otd_por_dsc       Decimal            @db.Decimal(5, 2)  // % Descuento aplicado
-  otd_vr_dsc        Decimal            @db.Decimal(10, 2) // Valor descuento de la línea
-  otd_vr_total      Decimal            @db.Decimal(10, 2) // Total línea
-  emp_codi          Int?
-  empleado          Empleado?          @relation(fields: [emp_codi], references: [emp_codi])
-  bod_codi          Int?
-  bodega            Bodega?            @relation(fields: [bod_codi], references: [bod_codi])
-  otd_observacion   String?            @db.Text
+  otm_codi        Int
+  orden           OrdenTrabajo @relation(fields: [otm_codi], references: [otm_codi], onDelete: Cascade)
+  otd_cont        Int          @default(1)
+  producto        Producto     @relation(fields: [pr_codi], references: [pro_codi])
+  pr_codi         Int
+  otd_cantidad    Decimal      @db.Decimal(10, 2)
+  otd_precio      Decimal      @db.Decimal(10, 2)
+  otd_sbtotal     Decimal      @db.Decimal(10, 2) // Subtotal línea (cantidad * precio)
+  otd_por_iva     Decimal      @db.Decimal(5, 2) // % IVA aplicado (puede ser 0 si es pedido)
+  otd_vr_iva      Decimal      @db.Decimal(10, 2) // Valor IVA de la línea
+  otd_por_dsc     Decimal      @db.Decimal(5, 2) // % Descuento aplicado
+  otd_vr_dsc      Decimal      @db.Decimal(10, 2) // Valor descuento de la línea
+  otd_vr_total    Decimal      @db.Decimal(10, 2) // Total línea
+  emp_codi        Int?
+  empleado        Empleado?    @relation(fields: [emp_codi], references: [emp_codi])
+  bod_codi        Int?
+  bodega          Bodega?      @relation(fields: [bod_codi], references: [bod_codi])
+  otd_observacion String?      @db.Text
 
   @@id([otm_codi, otd_cont])
   @@map("orden_detalle")
@@ -396,19 +396,20 @@ model OrdenDetalle {
 
 /// Entrada de mercancía (compra a proveedor)
 model Entrada {
-  ent_codi          Int                @id @default(autoincrement())
-  ent_nume          Int                @unique
-  proveedor         Proveedor          @relation(fields: [prv_codi], references: [prv_codi])
+  ent_codi          Int                    @id @default(autoincrement())
+  ent_nume          Int                    @unique
+  proveedor         Proveedor              @relation(fields: [prv_codi], references: [prv_codi])
   prv_codi          Int
-  ent_fecha         DateTime           @default(now())
-  ent_observaciones String?            @db.Text
-  ent_estado        Int                @default(0) // 0=Borrador, 1=Finalizado, 2=Anulado
-  ent_subtotal      Decimal            @default(0) @db.Decimal(10, 2)
-  ent_vr_iva        Decimal            @default(0) @db.Decimal(10, 2)
-  ent_vr_total      Decimal            @default(0) @db.Decimal(10, 2)
-  ent_docorigen     String?            @db.VarChar(60) // Documento origen (factura proveedor)
+  ent_fecha         DateTime               @default(now())
+  ent_observaciones String?                @db.Text
+  ent_estado        Int                    @default(0) // 0=Borrador, 1=Finalizado, 2=Anulado
+  ent_subtotal      Decimal                @default(0) @db.Decimal(10, 2)
+  ent_vr_iva        Decimal                @default(0) @db.Decimal(10, 2)
+  ent_vr_total      Decimal                @default(0) @db.Decimal(10, 2)
+  ent_docorigen     String?                @db.VarChar(60) // Documento origen (factura proveedor)
   detalles          EntradaDetalle[]
-  createdAt         DateTime           @default(now()) @map("created_at")
+  movimientos       MovimientoInventario[]
+  createdAt         DateTime               @default(now()) @map("created_at")
 
   @@index([prv_codi])
   @@index([ent_fecha])
@@ -418,17 +419,21 @@ model Entrada {
 /// Detalle de ítems de la entrada
 model EntradaDetalle {
   ent_codi          Int
-  entrada           Entrada            @relation(fields: [ent_codi], references: [ent_codi], onDelete: Cascade)
-  end_cont          Int                @default(1)
-  producto          Producto           @relation(fields: [pro_codi], references: [pro_codi])
+  entrada           Entrada  @relation(fields: [ent_codi], references: [ent_codi], onDelete: Cascade)
+  end_cont          Int      @default(1)
+  producto          Producto @relation(fields: [pro_codi], references: [pro_codi])
   pro_codi          Int
-  end_cantidad      Decimal            @db.Decimal(10, 2)
-  end_precio        Decimal            @db.Decimal(10, 2) // Precio de costo
-  end_vbas          Decimal?           @db.Decimal(10, 2) // Valor base sin IVA
-  end_viva          Decimal?           @db.Decimal(10, 2) // Valor del IVA
+  end_cantidad      Decimal  @db.Decimal(10, 2)
+  end_precio        Decimal  @db.Decimal(10, 2) // Precio de costo
+  end_sbtotal       Decimal  @db.Decimal(10, 2) // Subtotal línea (cantidad * precio)
+  end_por_iva       Decimal  @db.Decimal(5, 2) // % IVA aplicado
+  end_vr_iva        Decimal  @db.Decimal(10, 2) // Valor IVA de la línea
+  end_vr_total      Decimal  @db.Decimal(10, 2) // Total línea
+  end_vbas          Decimal? @db.Decimal(10, 2) // Valor base sin IVA
   bod_codi          Int
-  bodega            Bodega             @relation(fields: [bod_codi], references: [bod_codi])
-  pro_codi_anterior Int?               // Para tracking de cambios de producto
+  bodega            Bodega   @relation(fields: [bod_codi], references: [bod_codi])
+  end_observacion   String?  @db.Text
+  pro_codi_anterior Int? // Para tracking de cambios de producto
 
   @@id([ent_codi, end_cont])
   @@map("entradas_detalle")
@@ -440,20 +445,22 @@ model EntradaDetalle {
 
 /// Movimiento de inventario (auditoría de entradas/salidas)
 model MovimientoInventario {
-  mvi_codi          Int                @id @default(autoincrement())
-  mvi_clase_docu    Int                // 0=Entrada, 1=Salida, 2=Ajuste, 3=Devolución
-  mvi_tipo_docu     Int?               // Tipo de documento que origina el movimiento
-  mvi_num_docu      Int                // Número del documento origen
-  mvi_fecha_docu    DateTime
-  mvi_fecha_reg     DateTime           @default(now())
-  producto          Producto           @relation(fields: [pro_codi], references: [pro_codi])
-  pro_codi          Int
-  mvi_cantidad      Decimal            @db.Decimal(10, 2)
-  mvi_costo_unit    Decimal?           @db.Decimal(10, 2) // Costo unitario del movimiento
-  bodega            Bodega             @relation(fields: [bod_codi], references: [bod_codi])
-  bod_codi          Int
-  usu_codi          Int?               // Usuario que registró el movimiento
-  mvi_observacion   String?            @db.Text
+  mvi_codi        Int      @id @default(autoincrement())
+  mvi_clase_docu  Int // 0=Entrada, 1=Salida, 2=Ajuste, 3=Devolución
+  mvi_tipo_docu   Int? // Tipo de documento que origina el movimiento
+  mvi_num_docu    Int? // Número del documento origen
+  mvi_fecha_docu  DateTime
+  mvi_fecha_reg   DateTime @default(now())
+  producto        Producto @relation(fields: [pro_codi], references: [pro_codi])
+  pro_codi        Int
+  mvi_cantidad    Decimal  @db.Decimal(10, 2)
+  mvi_costo_unit  Decimal? @db.Decimal(10, 2) // Costo unitario del movimiento
+  bodega          Bodega   @relation(fields: [bod_codi], references: [bod_codi])
+  bod_codi        Int
+  usu_codi        Int? // Usuario que registró el movimiento
+  mvi_observacion String?  @db.Text
+  ent_codi        Int? // Referencia a entrada (si aplica)
+  entrada         Entrada? @relation(fields: [ent_codi], references: [ent_codi])
 
   @@index([pro_codi])
   @@index([mvi_fecha_docu])
