@@ -403,6 +403,8 @@ model Entrada {
   ent_fecha         DateTime           @default(now())
   ent_observaciones String?            @db.Text
   ent_estado        Int                @default(0) // 0=Borrador, 1=Finalizado, 2=Anulado
+  ent_subtotal      Decimal            @default(0) @db.Decimal(10, 2)
+  ent_vr_iva        Decimal            @default(0) @db.Decimal(10, 2)
   ent_vr_total      Decimal            @default(0) @db.Decimal(10, 2)
   ent_docorigen     String?            @db.VarChar(60) // Documento origen (factura proveedor)
   detalles          EntradaDetalle[]
