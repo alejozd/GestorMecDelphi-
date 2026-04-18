@@ -1,31 +1,56 @@
-```
-# Dependencies
-node_modules/
-
-# Environment variables
-.env
-.env.local
-
-# Logs
+# ======================
+# DELPHI (evita binarios y generados)
+# ======================
+*.dcu
+*.dcp
+*.obj
+*.exe
+*.dll
+*.bpl
+*.dbp.*
+*.dproj.*
+*.local
+__history/
+__recovery/
+Win32/
+Win64/
+Android64/
+iOSDevice64/
+*.~*
 *.log
+*.tmp
 
-# IDE files
-.vscode/
-.idea/
+# ======================
+# NODE.JS / NPM
+# ======================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.pnpm-store/
+coverage/
+.nyc_output/
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-venv/
-.venv/
+# ======================
+# REACT / VITE
+# ======================
+.dist/
+.build/
+out/
+*.log
+.DS_Store
+Thumbs.db
+
+# ======================
+# PRISMA
+# ======================
+prisma/migrations/**/migration.sql  # si no quieres versionar migraciones individuales
+prisma/dev.db
+prisma/dev.db-journal
+
+# ======================
+# ENTORNOS Y SECRETOS
+# ======================
 .env
 .env.local
-
-# Build outputs
-dist/
-build/
-target/
-```
+*.pem
+*.key
