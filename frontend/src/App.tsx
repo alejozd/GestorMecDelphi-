@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { PublicRoute, ProtectedRoute } from './components/ProtectedRoute';
 
 // Páginas
@@ -218,3 +218,9 @@ export const router = createBrowserRouter([
     element: <Navigate to="/" replace />,
   },
 ]);
+
+function App() {
+  return <RouterProvider router={router} />;
+}
+
+export default App;
