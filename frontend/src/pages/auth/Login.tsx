@@ -27,10 +27,14 @@ export default function Login() {
     setLoading(true);
     setError('');
 
+    console.log('Intentando login con:', { usuario: data.usuario });
+
     try {
       await login(data.usuario, data.password);
+      console.log('Login exitoso, navegando al dashboard');
       navigate('/');
     } catch (err: unknown) {
+      console.error('Error en login:', err);
       if (err instanceof Error) {
         setError(err.message || 'Error al iniciar sesión');
       } else {

@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { PublicRoute, ProtectedRoute } from './components/ProtectedRoute';
 
 // Páginas
@@ -215,7 +215,7 @@ export const router = createBrowserRouter([
   // Ruta comodín para 404
   {
     path: '*',
-    element: <Navigate to="/" replace />,
+    element: <Navigate to="/login" replace />,
   },
 ]);
 
