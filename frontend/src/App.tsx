@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { PublicRoute, ProtectedRoute } from './components/ProtectedRoute';
 
 // Páginas

@@ -106,7 +106,7 @@ class AuthService {
   /**
    * Verificar permisos para una opción
    */
-  hasPermission(opcionId: number, action: 'leer' | 'crear' | 'modificar' | 'borrar'): boolean {
+  hasPermission(_opcionId: number, _action: 'leer' | 'crear' | 'modificar' | 'borrar'): boolean {
     const usuario = this.getCurrentUser();
     if (!usuario?.roles) return false;
 

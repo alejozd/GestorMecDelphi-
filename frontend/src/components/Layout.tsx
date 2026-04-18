@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,7 +18,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
-  const { usuario, logout, hasPermission } = useAuth();
+  const { usuario, logout } = useAuth();
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   useEffect(() => {
