@@ -1,1 +1,667 @@
-(frontend/src/App.tsx is a source file, and there are no build artifacts, dependencies, or temporary files in the changes)
+```
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# IDE files
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.min.js
+*.min.css
+*.bundle.js
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Compression formats
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.rar
+*.7z
+*.bz2
+*.xz
+*.tgz
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Unit test reports
+*.xml
+*.gcov
+*.lcov
+
+# Local configuration files
+config.local
+settings_local.py
+
+# Browser-sync
+.browser-sync*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Package manager lock files
+package-lock.json
+yarn.lock
+composer.lock
+Pipfile.lock
+Gemfile.lock
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+MANIFEST
+
+# Debug files
+*.stackdump
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+.directory
+*.nib
+*.car
+
+# IDE specific files
+*.swp
+*.swo
+*~
+
+# Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# React
+*.hot-update.json
+
+# Vue
+*.vuepress/dist
+
+# Angular
+.angular/
+
+# Webpack
+webpack-stats.json
+
+# TypeScript
+*.tsbuildinfo
+
+# Bower
+bower_components/
+
+# Grunt
+.grunt
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# SASS/SCSS
+.sass-cache/
+
+# Ruby
+.bundle/
+vendor/bundle
+
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# C#
+*.dll
+*.exe
+*.pdb
+*.userprefs
+
+# PHP
+*.phar
+
+# Rust
+Cargo.lock
+target/
+
+# Elixir
+mix.lock
+_*
+
+# Erlang
+.erlang.cookie
+
+# Lua
+*.luac
+
+# Perl
+blib/
+pm_to_blib/
+*.run
+
+# R
+.Rhistory
+.RData
+
+# MATLAB
+*.fig
+*.mat
+
+# Stata
+*.dta
+
+# SPSS
+*.sav
+
+# ImageJ
+*.ijm
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# RStudio
+.rs-*
+.rprofile
+.Rprofile
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Code::Blocks
+*.depend
+*.layout
+*.cbp
+
+# Dev-C++
+*.dev
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+[ip|IP]ntsvcs
+*.VC.db
+*.VC.VC.opendb
+*.VC.VC.opendb-shm
+*.VC.VC.opendb-wal
+*.VC.VC.opendb-shm
+*.VC.VC.opendb-wal
+
+# Visual Studio Code
+.vscode/
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+*.pbxuser
+*.mode1v3
+*.perspectivev3
+*.xcuserstate
+*.xccheckout
+DerivedData/
+
+# Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+*.apk
+*.ap_
+local.properties
+gradle-app.setting
+.gradle
+build/
+
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+*.moc.cpp
+*.qm
+*.prl
+
+# CLion
+cmake-build-*/
+
+# AppCode
+*.xcodeproj/
+xcuserdata/
+
+# Dart
+.dart_tool/
+.packages
+.pubspec.lock
+
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugin-dependencies
+.packages
+build/
+ios/Flutter/flutter_assets
+
+# Unity
+Library/
+Temp/
+Obj/
+Logs/
+MemoryCaptures/
+Builds/
+*.pidb
+*.userprefs
+*.unityproj
+*.meta
+
+# Unreal Engine
+[Bb]in/
+[Oo]bj/
+*.Target.cs
+*.Editor.Target.cs
+Saved/
+Intermediate/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.csharp
+*.pidb
+*.userprefs
+*.mobileprovision
+*.UnityScript
+*.Boo
+*.shader
+*.cginc
+*.compute
+*.prefab
+*.mat
+*.anim
+*.unity
+*.asset
+*.meta
+*.asmdef
+*.asmref
+*.log
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.manifest
+install_manifest.txt
+*.cmake
+
+# Autotools
+autom4te.cache/
+.libs/
+*.la
+*.lai
+aclocal.m4
+config.h.in
+config.h
+Makefile.in
+stamp-h1
+.libs
+.deps
+.libs/*
+*.lo
+
+# Meson
+meson-private/
+meson-log.txt
+
+# Nim
+nimcache/
+
+# Julia
+.julia/
+
+# Haskell
+dist-newstyle/
+.cabal-sandbox/
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+
+# PureScript
+.output/
+
+# Elm
+elm-stuff/
+
+# Tern
+.tern-port
+.tern-project
+
+# Flow
+.flowconfig
+
+# Elm
+elm-stuff/
+
+# CoffeeScript
+coffee/
+*.coffee.md
+
+# TeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.cpr
+*.crs
+*.csg
+*.glo
+*.gls
+*.hd
+*.idx
+*.ilg
+*.ind
+*.inx
+*.lof
+*.log
+*.lot
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.run.xml
+*.synctex.gz
+*.tex.backup
+*.toc
+*.xdv
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.synctex(busy)
+*.fls
+*.xdv
+*.fdb_latexmk
+
+# Codecov
+codecov.yml
+
+# Firebase
+.firebase/
+
+# Ionic
+ionic.config.json
+
+# Cordova
+config.xml
+platforms/
+plugins/
+
+# Capacitor
+capacitor.config.json
+android/
+ios/
+
+# Expo
+.expo/
+.expo-shared/
+
+# NativeScript
+node_modules/
+platforms/
+hooks/
+
+# Meteor
+.meteor/local/
+
+# Next.js
+.next/
+out/
+
+# Nuxt.js
+.nuxt/
+dist/
+
+# Gatsby
+.public/
+.cache/
+
+# VuePress
+.vuepress/dist
+
+# Gridsome
+.gridsome/
+
+# Docusaurus
+.docusaurus/
+
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Hugo
+public/
+resources/_gen/
+
+# Middleman
+.sass-cache/
+.site/
+.cache/
+
+# MkDocs
+/site/
+
+# Sphinx
+_doc/
+_doc_build/
+
+# Static site generators
+.svelte-kit/
+output/
+__sapper__/
+.circleci/
+.deploy/
+.vercel/
+.now/
+
+# Serverless
+.serverless/
+
+# Vagrant
+.vagrant/
+
+# Docker
+.dockerignore
+Dockerfile.*
+
+# Ansible
+.retry
+
+# Salt
+.salt/
+salt-ssh.log
+
+# Puppet
+manifests/
+modules/
+
+# Chef
+cookbooks/
+.nodes/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfvars
+
+# Kubernetes
+.kube/
+
+# Helm
+charts/
+*.lock
+
+# Kustomize
+.kustomize/
+
+# Openshift
+.openshift/
+
+# Jenkins
+.jenkins/
+workspace/
+
+# GitLab CI
+.gitlab-ci.yml
+
+# Travis CI
+.travis.yml
+
+# CircleCI
+.circleci/
+
+# GitHub Actions
+.github/
+
+# AppVeyor
+.appveyor.yml
+
+# Codeship
+codeship-services.yml
+codeship-steps.yml
+
+# Semaphore
+.semaphore/
+
+# Drone
+.drone.yml
+
+# Wercker
+wercker.yml
+
+# Shippable
+shippable.yml
+
+# Buddy
+buddy.yml
+
+# Git
+.git/
+.gitignore
+
+# Project-specific build outputs (from the provided file list)
+frontend/node_modules/
+
+```
