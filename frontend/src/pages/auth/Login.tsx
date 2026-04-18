@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -12,8 +12,8 @@ import './Login.css';
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const {
     register,
@@ -23,7 +23,7 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit: SubmitHandler<LoginFormData> = async (data: LoginFormData) => {
     setLoading(true);
     setError('');
 
@@ -45,16 +45,16 @@ export default function Login() {
     <div className="login-container">
       <div className="login-card card">
         <div className="text-center mb-4">
-          <i className="pi pi-wrench text-primary" style={{ fontSize: '4rem' }}></i>
+          <i className="pi pi-wrench icon-wrench"></i>
           <h1 className="mt-3 mb-2">Serviteca Pro</h1>
           <p className="text-secondary m-0">Gestión de Taller Mecánico</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-3">
           {error && (
-            <div className="p-error bg-red-50 p-3 border-round text-sm">
-              <i className="pi pi-exclamation-circle mr-2"></i>
-              {error}
+            <div className="error-message">
+              <i className="pi pi-exclamation-circle"></i>
+              <span>{error}</span>
             </div>
           )}
 
@@ -70,7 +70,7 @@ export default function Login() {
               disabled={loading}
             />
             {errors.usuario && (
-              <small className="p-error">{errors.usuario.message}</small>
+              <small className="error-text">{errors.usuario.message}</small>
             )}
           </div>
 
@@ -89,12 +89,12 @@ export default function Login() {
               disabled={loading}
             />
             {errors.password && (
-              <small className="p-error">{errors.password.message}</small>
+              <small className="error-text">{errors.password.message}</small>
             )}
           </div>
 
           <div className="flex justify-content-between align-items-center mt-3">
-            <a href="#" className="text-primary text-sm hover:underline">
+            <a href="#" className="forgot-password-link">
               ¿Olvidó su contraseña?
             </a>
           </div>
@@ -109,8 +109,8 @@ export default function Login() {
           />
         </form>
 
-        <div className="text-center mt-4 pt-3 border-top-1 surface-border">
-          <small className="text-secondary">
+        <div className="footer-text">
+          <small>
             © 2024 Serviteca Pro - Todos los derechos reservados
           </small>
         </div>
