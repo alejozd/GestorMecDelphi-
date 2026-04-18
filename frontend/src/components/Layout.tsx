@@ -1,9 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menubar, MenuItem } from 'primereact/menubar';
+import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
+import { Button } from 'primereact/button';
 import { useAuth } from '../context/AuthContext';
+
+interface MenuItem {
+  label?: string;
+  icon?: string;
+  command?: () => void;
+  items?: MenuItem[];
+}
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -155,10 +163,10 @@ export default function Layout({ children }: LayoutProps) {
         size="large"
         className="bg-primary text-white"
       />
-      <MenuItem
+      <Button
         icon="pi pi-sign-out"
         label="Cerrar Sesión"
-        command={logout}
+        onClick={logout}
         className="p-button-text"
       />
     </div>
