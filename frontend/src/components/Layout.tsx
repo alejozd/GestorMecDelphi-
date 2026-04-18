@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menubar, MenuItem } from 'primereact/menubar';
+import { Menubar } from 'primereact/menubar';
+import { MenuItem } from 'primereact/menuitem';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 import { useAuth } from '../context/AuthContext';

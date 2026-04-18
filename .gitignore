@@ -5,17 +5,13 @@ node_modules/
 # Build outputs
 dist/
 build/
-coverage/
-htmlcov/
-
-# Logs and temp files
-*.log
-*.tmp
+*.js.map
+*.tsbuildinfo
 
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Editors
 .vscode/
@@ -23,32 +19,37 @@ htmlcov/
 *.swp
 *.swo
 
+# Logs
+*.log
+
+# Temp files
+*.tmp
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.pytest_cache/
+*.so
+*.egg-info/
+.eggs/
+
+# Java/Gradle
+target/
+.gradle/
+build/
+
+# MyPy
 .mypy_cache/
 
-# Compiled and binary
-*.o
-*.obj
-*.so
-*.a
-*.dll
-*.exe
-*.out
-
-# System files
-.DS_Store
-Thumbs.db
+# Pytest
+.pytest_cache/
 
 # Compressed files
 *.zip
