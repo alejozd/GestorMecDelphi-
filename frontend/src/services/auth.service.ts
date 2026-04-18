@@ -41,9 +41,9 @@ class AuthService {
     const response = await apiService.post<AuthResponse>('/auth/login', credentials);
     console.log('Respuesta del login:', response);
     
-    if (response.token) {
-      localStorage.setItem(this.tokenKey, response.token);
-      localStorage.setItem(this.usuarioKey, JSON.stringify(response.usuario));
+    if (response.success && response.data.token) {
+      localStorage.setItem(this.tokenKey, response.data.token);
+      localStorage.setItem(this.usuarioKey, JSON.stringify(response.data.usuario));
       console.log('Token y usuario guardados en localStorage');
     }
     

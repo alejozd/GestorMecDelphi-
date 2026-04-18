@@ -40,7 +40,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         usuario: usuarioParam, 
         password 
       });
-      setUsuario(response.usuario as Usuario);
+      if (response.success) {
+        setUsuario(response.data.usuario as Usuario);
+      } else {
+        throw new Error(response.message || 'Error al iniciar sesión');
+      }
     } catch (error) {
       throw error;
     }

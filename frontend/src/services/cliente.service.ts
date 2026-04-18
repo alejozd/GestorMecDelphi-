@@ -1,4 +1,4 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
 
 // Interfaces
 export interface Cliente {
@@ -47,13 +47,18 @@ export interface FiltroCliente {
   ciu_codi?: number;
 }
 
-export interface ClientesResponse {
-  data: Cliente[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
+export interface PaginatedData<T> {
+  data: T[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
+
+export type ClientesResponse = ApiResponse<PaginatedData<Cliente>>;
+export type ClienteResponse = ApiResponse<Cliente>;
 
 class ClienteService {
   private endpoint = '/clientes';
@@ -76,16 +81,16 @@ class ClienteService {
   /**
    * Obtener cliente por ID
    */
-  async getClienteById(id: number): Promise<Cliente> {
-    return apiService.get<Cliente>(`${this.endpoint}/${id}`);
+  async getClienteById(id: number): Promise<ClienteResponse> {
+    return apiService.get<ClienteResponse>(`${this.endpoint}/${id}`);
   }
 
   /**
    * Obtener cliente por número de documento
    */
-  async getClienteByDocumento(codTipdo: number, numdoc: string): Promise<Cliente | null> {
+  async getClienteByDocumento(codTipdo: number, numdoc: string): Promise<ClienteResponse | null> {
     try {
-      return await apiService.get<Cliente>(`${this.endpoint}/documento/${codTipdo}/${numdoc}`);
+      return await apiService.get<ClienteResponse>(`${this.endpoint}/documento/${codTipdo}/${numdoc}`);
     } catch {
       return null;
     }
@@ -94,16 +99,16 @@ class ClienteService {
   /**
    * Crear nuevo cliente
    */
-  async createCliente(data: ClienteCreate): Promise<Cliente> {
-    return apiService.post<Cliente>(this.endpoint, data);
+  async createCliente(data: ClienteCreate): Promise<ClienteResponse> {
+    return apiService.post<ClienteResponse>(this.endpoint, data);
   }
 
   /**
    * Actualizar cliente
    */
-  async updateCliente(data: ClienteUpdate): Promise<Cliente> {
+  async updateCliente(data: ClienteUpdate): Promise<ClienteResponse> {
     const { cli_codi, ...rest } = data;
-    return apiService.put<Cliente>(`${this.endpoint}/${cli_codi}`, rest);
+    return apiService.put<ClienteResponse>(`${this.endpoint}/${cli_codi}`, rest);
   }
 
   /**
@@ -122,7 +127,7 @@ class ClienteService {
     if (limite) params.append('limite', String(limite));
     
     const response = await apiService.get<ClientesResponse>(`${this.endpoint}/search?${params.toString()}`);
-    return response.data;
+    return response.data.data;
   }
 
   /**

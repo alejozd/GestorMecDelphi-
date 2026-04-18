@@ -1,19 +1,31 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, InternalAxiosRequestConfig } from 'axios';
 
+// Interfaz base para respuestas de la API
+export interface ApiResponse<T = any> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
 // Interfaz para la respuesta de autenticación
-export interface AuthResponse {
+export interface AuthData {
   token: string;
   usuario: {
     usu_codi: number;
     usuario: string;
     nombre: string;
     correo?: string;
+    rol_codi: number;
+    rol_nombre: string;
+    estado: number;
     roles?: Array<{
       rol_codi: number;
       rol_nombre: string;
     }>;
   };
 }
+
+export type AuthResponse = ApiResponse<AuthData>;
 
 // Interfaz para errores de API
 export interface ApiError {

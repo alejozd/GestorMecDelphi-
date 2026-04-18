@@ -1,4 +1,5 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
+import { PaginatedData } from './cliente.service';
 
 // Interfaces
 export interface Vehiculo {
@@ -50,13 +51,8 @@ export interface FiltroVehiculo {
   mr_codi?: number;
 }
 
-export interface VehiculosResponse {
-  data: Vehiculo[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
-}
+export type VehiculosResponse = ApiResponse<PaginatedData<Vehiculo>>;
+export type VehiculoResponse = ApiResponse<Vehiculo>;
 
 class VehiculoService {
   private endpoint = '/vehiculos';
@@ -79,16 +75,16 @@ class VehiculoService {
   /**
    * Obtener vehículo por ID
    */
-  async getVehiculoById(id: number): Promise<Vehiculo> {
-    return apiService.get<Vehiculo>(`${this.endpoint}/${id}`);
+  async getVehiculoById(id: number): Promise<VehiculoResponse> {
+    return apiService.get<VehiculoResponse>(`${this.endpoint}/${id}`);
   }
 
   /**
    * Obtener vehículo por placa
    */
-  async getVehiculoByPlaca(placa: string): Promise<Vehiculo | null> {
+  async getVehiculoByPlaca(placa: string): Promise<VehiculoResponse | null> {
     try {
-      return await apiService.get<Vehiculo>(`${this.endpoint}/placa/${encodeURIComponent(placa)}`);
+      return await apiService.get<VehiculoResponse>(`${this.endpoint}/placa/${encodeURIComponent(placa)}`);
     } catch {
       return null;
     }
@@ -101,22 +97,22 @@ class VehiculoService {
     const response = await apiService.get<VehiculosResponse>(
       `${this.endpoint}?cli_codi=${cliCodi}&limite=100`
     );
-    return response.data;
+    return response.data.data;
   }
 
   /**
    * Crear nuevo vehículo
    */
-  async createVehiculo(data: VehiculoCreate): Promise<Vehiculo> {
-    return apiService.post<Vehiculo>(this.endpoint, data);
+  async createVehiculo(data: VehiculoCreate): Promise<VehiculoResponse> {
+    return apiService.post<VehiculoResponse>(this.endpoint, data);
   }
 
   /**
    * Actualizar vehículo
    */
-  async updateVehiculo(data: VehiculoUpdate): Promise<Vehiculo> {
+  async updateVehiculo(data: VehiculoUpdate): Promise<VehiculoResponse> {
     const { vxc_codi, ...rest } = data;
-    return apiService.put<Vehiculo>(`${this.endpoint}/${vxc_codi}`, rest);
+    return apiService.put<VehiculoResponse>(`${this.endpoint}/${vxc_codi}`, rest);
   }
 
   /**
@@ -129,8 +125,8 @@ class VehiculoService {
   /**
    * Actualizar kilometraje
    */
-  async actualizarKilometraje(vxcCodi: number, kilometraje: number): Promise<Vehiculo> {
-    return apiService.patch<Vehiculo>(`${this.endpoint}/${vxcCodi}/kilometraje`, {
+  async actualizarKilometraje(vxcCodi: number, kilometraje: number): Promise<VehiculoResponse> {
+    return apiService.patch<VehiculoResponse>(`${this.endpoint}/${vxcCodi}/kilometraje`, {
       kilómetro_actual: kilometraje,
     });
   }

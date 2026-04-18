@@ -1,4 +1,5 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
+import { PaginatedData } from './cliente.service';
 
 // Interfaces
 export interface Producto {
@@ -50,13 +51,8 @@ export interface FiltroProducto {
   conStock?: boolean;
 }
 
-export interface ProductosResponse {
-  data: Producto[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
-}
+export type ProductosResponse = ApiResponse<PaginatedData<Producto>>;
+export type ProductoResponse = ApiResponse<Producto>;
 
 export interface MovimientoInventario {
   mvi_codi: number;
@@ -96,16 +92,16 @@ class ProductoService {
   /**
    * Obtener producto por ID
    */
-  async getProductoById(id: number): Promise<Producto> {
-    return apiService.get<Producto>(`${this.endpoint}/${id}`);
+  async getProductoById(id: number): Promise<ProductoResponse> {
+    return apiService.get<ProductoResponse>(`${this.endpoint}/${id}`);
   }
 
   /**
    * Obtener producto por código de barras
    */
-  async getProductoByCodBarras(codBarras: string): Promise<Producto | null> {
+  async getProductoByCodBarras(codBarras: string): Promise<ProductoResponse | null> {
     try {
-      return await apiService.get<Producto>(`${this.endpoint}/cod-barras/${encodeURIComponent(codBarras)}`);
+      return await apiService.get<ProductoResponse>(`${this.endpoint}/cod-barras/${encodeURIComponent(codBarras)}`);
     } catch {
       return null;
     }
@@ -114,16 +110,16 @@ class ProductoService {
   /**
    * Crear nuevo producto
    */
-  async createProducto(data: ProductoCreate): Promise<Producto> {
-    return apiService.post<Producto>(this.endpoint, data);
+  async createProducto(data: ProductoCreate): Promise<ProductoResponse> {
+    return apiService.post<ProductoResponse>(this.endpoint, data);
   }
 
   /**
    * Actualizar producto
    */
-  async updateProducto(data: ProductoUpdate): Promise<Producto> {
+  async updateProducto(data: ProductoUpdate): Promise<ProductoResponse> {
     const { pro_codi, ...rest } = data;
-    return apiService.put<Producto>(`${this.endpoint}/${pro_codi}`, rest);
+    return apiService.put<ProductoResponse>(`${this.endpoint}/${pro_codi}`, rest);
   }
 
   /**
@@ -143,7 +139,7 @@ class ProductoService {
     if (proClase !== undefined) params.append('pro_clase', String(proClase));
     
     const response = await apiService.get<ProductosResponse>(`${this.endpoint}/search?${params.toString()}`);
-    return response.data;
+    return response.data.data;
   }
 
   /**
@@ -169,12 +165,12 @@ class ProductoService {
   /**
    * Obtener movimientos de inventario de un producto
    */
-  async getMovimientos(proCodi: number, fechaDesde?: string, fechaHasta?: string): Promise<MovimientoInventario[]> {
+  async getMovimientos(proCodi: number, fechaDesde?: string, fechaHasta?: string): Promise<ApiResponse<MovimientoInventario[]>> {
     const params = new URLSearchParams();
     if (fechaDesde) params.append('fechaDesde', fechaDesde);
     if (fechaHasta) params.append('fechaHasta', fechaHasta);
     
-    return apiService.get<MovimientoInventario[]>(`${this.endpoint}/${proCodi}/movimientos?${params.toString()}`);
+    return apiService.get<ApiResponse<MovimientoInventario[]>>(`${this.endpoint}/${proCodi}/movimientos?${params.toString()}`);
   }
 
   /**

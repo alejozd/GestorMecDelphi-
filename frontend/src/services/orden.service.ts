@@ -1,4 +1,5 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
+import { PaginatedData } from './cliente.service';
 
 // Interfaces
 export interface OrdenDetalleItem {
@@ -96,13 +97,8 @@ export interface FiltroOrden {
   fechaHasta?: string;
 }
 
-export interface OrdenesResponse {
-  data: OrdenTrabajo[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
-}
+export type OrdenesResponse = ApiResponse<PaginatedData<OrdenTrabajo>>;
+export type OrdenResponse = ApiResponse<OrdenTrabajo>;
 
 export interface FinalizarOrdenData {
   otm_clase_doc: number; // 1=Factura, 2=Pedido/Recibo
@@ -135,16 +131,16 @@ class OrdenTrabajoService {
   /**
    * Obtener orden por ID
    */
-  async getOrdenById(id: number): Promise<OrdenTrabajo> {
-    return apiService.get<OrdenTrabajo>(`${this.endpoint}/${id}`);
+  async getOrdenById(id: number): Promise<OrdenResponse> {
+    return apiService.get<OrdenResponse>(`${this.endpoint}/${id}`);
   }
 
   /**
    * Obtener orden por número
    */
-  async getOrdenByNumero(numero: number): Promise<OrdenTrabajo | null> {
+  async getOrdenByNumero(numero: number): Promise<OrdenResponse | null> {
     try {
-      return await apiService.get<OrdenTrabajo>(`${this.endpoint}/numero/${numero}`);
+      return await apiService.get<OrdenResponse>(`${this.endpoint}/numero/${numero}`);
     } catch {
       return null;
     }
@@ -153,16 +149,16 @@ class OrdenTrabajoService {
   /**
    * Crear nueva orden de trabajo
    */
-  async createOrden(data: OrdenTrabajoCreate): Promise<OrdenTrabajo> {
-    return apiService.post<OrdenTrabajo>(this.endpoint, data);
+  async createOrden(data: OrdenTrabajoCreate): Promise<OrdenResponse> {
+    return apiService.post<OrdenResponse>(this.endpoint, data);
   }
 
   /**
    * Actualizar orden (agregar/quitar ítems)
    */
-  async updateOrden(data: OrdenTrabajoUpdate): Promise<OrdenTrabajo> {
+  async updateOrden(data: OrdenTrabajoUpdate): Promise<OrdenResponse> {
     const { otm_codi, ...rest } = data;
-    return apiService.put<OrdenTrabajo>(`${this.endpoint}/${otm_codi}`, rest);
+    return apiService.put<OrdenResponse>(`${this.endpoint}/${otm_codi}`, rest);
   }
 
   /**
@@ -175,22 +171,22 @@ class OrdenTrabajoService {
     otd_por_dsc?: number;
     emp_codi?: number;
     bod_codi?: number;
-  }): Promise<OrdenTrabajo> {
-    return apiService.post<OrdenTrabajo>(`${this.endpoint}/${otmCodi}/items`, item);
+  }): Promise<OrdenResponse> {
+    return apiService.post<OrdenResponse>(`${this.endpoint}/${otmCodi}/items`, item);
   }
 
   /**
    * Eliminar ítem de orden
    */
-  async eliminarItem(otmCodi: number, otdCont: number): Promise<OrdenTrabajo> {
-    return apiService.delete<OrdenTrabajo>(`${this.endpoint}/${otmCodi}/items/${otdCont}`);
+  async eliminarItem(otmCodi: number, otdCont: number): Promise<OrdenResponse> {
+    return apiService.delete<OrdenResponse>(`${this.endpoint}/${otmCodi}/items/${otdCont}`);
   }
 
   /**
    * Finalizar orden (convertir a Factura o Pedido)
    */
-  async finalizarOrden(otmCodi: number, data: FinalizarOrdenData): Promise<OrdenTrabajo> {
-    return apiService.post<OrdenTrabajo>(`${this.endpoint}/${otmCodi}/finalizar`, data);
+  async finalizarOrden(otmCodi: number, data: FinalizarOrdenData): Promise<OrdenResponse> {
+    return apiService.post<OrdenResponse>(`${this.endpoint}/${otmCodi}/finalizar`, data);
   }
 
   /**
@@ -205,8 +201,8 @@ class OrdenTrabajoService {
   /**
    * Obtener próximos consecutivos
    */
-  async getNextConsecutivo(): Promise<{ nextNumero: number }> {
-    return apiService.get(`${this.endpoint}/next-consecutivo`);
+  async getNextConsecutivo(): Promise<ApiResponse<{ nextNumero: number }>> {
+    return apiService.get<ApiResponse<{ nextNumero: number }>>(`${this.endpoint}/next-consecutivo`);
   }
 
   /**

@@ -1,4 +1,5 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
+import { PaginatedData } from './cliente.service';
 
 // Interfaces
 export interface HistorialServicio {
@@ -44,19 +45,14 @@ export interface FiltroHistorial {
   limite?: number;
 }
 
-export interface HistorialResponse {
-  data: HistorialServicio[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
-  resumen?: {
-    totalOrdenes: number;
-    vrTotalHistorico: number;
-    ultimoServicio?: string;
-    kilometrajeActual?: number;
-  };
+export interface HistorialResumen {
+  totalOrdenes: number;
+  vrTotalHistorico: number;
+  ultimoServicio?: string;
+  kilometrajeActual?: number;
 }
+
+export type HistorialResponse = ApiResponse<PaginatedData<HistorialServicio> & { resumen?: HistorialResumen }>;
 
 class HistorialService {
   private endpoint = '/historial';
@@ -94,11 +90,11 @@ class HistorialService {
   /**
    * Obtener consumo por período (gráfica)
    */
-  async getConsumoPorPeriodo(cliCodi: number, meses?: number): Promise<ConsumoPorPeriodo[]> {
+  async getConsumoPorPeriodo(cliCodi: number, meses?: number): Promise<ApiResponse<ConsumoPorPeriodo[]>> {
     const params = new URLSearchParams();
     if (meses) params.append('meses', String(meses));
     
-    return apiService.get<ConsumoPorPeriodo[]>(
+    return apiService.get<ApiResponse<ConsumoPorPeriodo[]>>(
       `${this.endpoint}/cliente/${cliCodi}/consumo-periodo?${params.toString()}`
     );
   }
@@ -110,27 +106,34 @@ class HistorialService {
     const params = new URLSearchParams();
     if (limite) params.append('limite', String(limite));
     
-    return apiService.get<Array<{
+    return apiService.get<ApiResponse<Array<{
       pro_codi: number;
       pro_nombre: string;
       frecuencia: number;
       vrPromedio: number;
-    }>>(`${this.endpoint}/vehiculo/${vxcCodi}/servicios-frecuentes?${params.toString()}`);
+    }>>>(`${this.endpoint}/vehiculo/${vxcCodi}/servicios-frecuentes?${params.toString()}`);
   }
 
   /**
    * Obtener próximo mantenimiento sugerido
    */
-  async getNextMantenimientoSugerido(vxcCodi: number): Promise<{
+  async getNextMantenimientoSugerido(vxcCodi: number): Promise<ApiResponse<{
     kilometrajeSugerido: number;
     fechaSugerida?: string;
     serviciosRecomendados: Array<{
       pro_codi: number;
       pro_nombre: string;
     }>;
-  } | null> {
+  }> | null> {
     try {
-      return await apiService.get(`${this.endpoint}/vehiculo/${vxcCodi}/proximo-mantenimiento`);
+      return await apiService.get<ApiResponse<{
+        kilometrajeSugerido: number;
+        fechaSugerida?: string;
+        serviciosRecomendados: Array<{
+          pro_codi: number;
+          pro_nombre: string;
+        }>;
+      }>>(`${this.endpoint}/vehiculo/${vxcCodi}/proximo-mantenimiento`);
     } catch {
       return null;
     }

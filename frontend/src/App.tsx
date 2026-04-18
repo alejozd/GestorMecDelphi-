@@ -217,7 +217,12 @@ export const router = createBrowserRouter([
     path: '*',
     element: <Navigate to="/login" replace />,
   },
-]);
+], {
+  future: {
+    v7_relativeSplatPath: true,
+    v7_startTransition: true,
+  },
+} as any);
 
 function App() {
   return <RouterProvider router={router} />;
