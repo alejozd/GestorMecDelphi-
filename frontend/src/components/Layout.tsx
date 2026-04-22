@@ -162,25 +162,29 @@ export default function Layout({ children }: LayoutProps) {
   );
 
   const end = (
-    <div className="flex align-items-center">
-      <div className="flex flex-column align-items-end mr-3 hidden lg:flex">
-        <span className="text-sm font-bold text-900">{usuario?.nombre}</span>
-        <span className="text-xs text-secondary">@{usuario?.usuario}</span>
-      </div>
-      <Avatar 
-        icon="pi pi-user" 
-        shape="circle" 
-        className="bg-blue-50 text-primary border-1 border-blue-200"
-        style={{ width: '35px', height: '35px' }}
-      />
-      <div className="ml-3 pl-3 border-left-1 surface-border">
-        <Button
-          icon="pi pi-power-off"
-          label="Salir"
-          onClick={logout}
-          className="p-button-danger p-button-text p-button-sm font-bold"
+    <div className="flex align-items-center gap-2">
+      <div className="flex align-items-center py-1 px-2 border-round">
+        <div className="flex flex-column align-items-end mr-3 hidden sm:flex">
+          <span className="text-sm font-bold text-900 line-height-2">{usuario?.nombre}</span>
+          <span className="text-xs text-500 line-height-1">@{usuario?.usuario}</span>
+        </div>
+        <Avatar
+          icon="pi pi-user"
+          shape="circle"
+          className="bg-primary-50 text-primary border-1 border-primary-100"
         />
       </div>
+
+      <div className="border-left-1 surface-border h-2rem mx-2"></div>
+
+      <Button
+        icon="pi pi-power-off"
+        label="Salir"
+        onClick={logout}
+        severity="danger"
+        text
+        className="p-button-rounded p-button-sm font-bold"
+      />
     </div>
   );
 

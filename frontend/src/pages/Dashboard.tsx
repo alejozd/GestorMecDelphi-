@@ -38,11 +38,19 @@ export default function Dashboard() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [statsRes, ordenesRes, stockRes] = await Promise.all([
+      // Intentar cargar datos en paralelo, manejando errores individuales para stock
+      const [statsRes, ordenesRes] = await Promise.all([
         ordenTrabajoService.getStats(),
-        ordenTrabajoService.getOrdenes({ limite: 5 }),
-        stockService.getStock({ conStockBajo: true, limite: 1 })
+        ordenTrabajoService.getOrdenes({ limite: 5 })
       ]);
+
+      let stockBajo = 0;
+      try {
+        const stockRes = await stockService.getStock({ conStockBajo: true, limite: 1 });
+        stockBajo = stockRes.data.resumen?.productosStockBajo || 0;
+      } catch (err) {
+        console.warn('Servicio de stock no disponible o no implementado');
+      }
 
       const ordenStats = statsRes.data;
 
@@ -52,8 +60,8 @@ export default function Dashboard() {
         ordenesEnProceso: ordenStats.porEstado.find(e => e.otm_estado === 0)?._count || 0,
         facturasMes: ordenStats.porTipo.find(t => t.otm_clase_doc === 1)?._count || 0,
         pedidosMes: ordenStats.porTipo.find(t => t.otm_clase_doc === 2)?._count || 0,
-        productosStockBajo: stockRes.data.resumen?.productosStockBajo || 0,
-        clientesNuevosMes: 0, // El backend actual no parece tener este endpoint específico
+        productosStockBajo: stockBajo,
+        clientesNuevosMes: 0,
       });
 
       if (ordenesRes.data && ordenesRes.data.data) {
