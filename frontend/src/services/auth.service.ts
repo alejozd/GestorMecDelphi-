@@ -37,14 +37,11 @@ class AuthService {
    * Iniciar sesión
    */
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    console.log('AuthService.login llamado con:', { usuario: credentials.usuario });
     const response = await apiService.post<AuthResponse>('/auth/login', credentials);
-    console.log('Respuesta del login:', response);
     
     if (response.success && response.data.token) {
       localStorage.setItem(this.tokenKey, response.data.token);
       localStorage.setItem(this.usuarioKey, JSON.stringify(response.data.usuario));
-      console.log('Token y usuario guardados en localStorage');
     }
     
     return response;

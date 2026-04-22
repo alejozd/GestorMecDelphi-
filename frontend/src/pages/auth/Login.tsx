@@ -18,8 +18,7 @@ export default function Login() {
   const {
     control,
     handleSubmit,
-    watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
@@ -29,23 +28,14 @@ export default function Login() {
     }
   });
 
-  const formValues = watch();
-  console.log('Login Render - Current Values:', formValues);
-  console.log('Login Render - Current Errors:', errors);
-  console.log('Is Form Valid?', isValid);
-
   const onSubmit: SubmitHandler<LoginFormData> = async (data: LoginFormData) => {
     setLoading(true);
     setError('');
 
-    console.log('Intentando login con:', { usuario: data.usuario });
-
     try {
       await login(data.usuario, data.password);
-      console.log('Login exitoso, navegando al dashboard');
       navigate('/');
     } catch (err: unknown) {
-      console.error('Error en login:', err);
       if (err instanceof Error) {
         setError(err.message || 'Error al iniciar sesión');
       } else {
@@ -66,7 +56,7 @@ export default function Login() {
         </div>
 
         <form
-          onSubmit={handleSubmit(onSubmit, (err) => console.log('Submit Error - Validation failed:', err))}
+          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-column gap-3"
           noValidate
         >
