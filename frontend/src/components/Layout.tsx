@@ -150,39 +150,55 @@ export default function Layout({ children }: LayoutProps) {
     setMenuItems(items);
   }, [navigate]);
 
+  const start = (
+    <div className="flex align-items-center mr-4">
+      <div className="bg-primary border-round p-1 mr-2 flex align-items-center justify-content-center" style={{ width: '35px', height: '35px' }}>
+        <i className="pi pi-wrench text-white text-xl"></i>
+      </div>
+      <span className="text-xl font-bold text-primary hidden md:block">
+        Serviteca<span className="text-amber-600">Pro</span>
+      </span>
+    </div>
+  );
+
   const end = (
     <div className="flex align-items-center gap-3">
-      <div className="flex flex-column align-items-end">
-        <span className="text-sm font-medium">{usuario?.nombre}</span>
+      <div className="flex flex-column align-items-end hidden sm:flex">
+        <span className="text-sm font-medium text-900">{usuario?.nombre}</span>
         <small className="text-secondary text-xs">{usuario?.usuario}</small>
       </div>
       <Avatar 
         icon="pi pi-user" 
         shape="circle" 
-        size="large"
-        className="bg-primary text-white"
+        className="bg-primary-reverse text-primary border-1 border-primary"
       />
       <Button
         icon="pi pi-sign-out"
-        label="Cerrar Sesión"
+        label="Salir"
         onClick={logout}
-        className="p-button-text"
+        className="p-button-text p-button-secondary p-button-sm"
       />
     </div>
   );
 
   return (
-    <div className="min-h-screen surface-ground">
-      <div className="card shadow-2 mb-0 border-bottom-1 surface-border">
-        <Menubar model={menuItems} end={end} />
-      </div>
+    <div className="min-h-screen flex flex-column surface-ground">
+      <header className="sticky top-0 z-5 shadow-2 surface-card border-bottom-1 surface-border">
+        <Menubar model={menuItems} start={start} end={end} className="border-none px-4 py-2" />
+      </header>
       
-      <main className="p-4 fade-in">
+      <main className="flex-grow-1 p-3 md:p-4 fade-in max-w-screen-2xl mx-auto w-full">
         {children}
       </main>
 
-      <footer className="text-center py-4 text-secondary text-sm border-top-1 surface-border mt-4">
-        <p>© 2024 Serviteca Pro - Sistema de Gestión de Taller Mecánico</p>
+      <footer className="surface-card text-center py-4 text-secondary text-sm border-top-1 surface-border mt-auto">
+        <div className="flex flex-column md:flex-row justify-content-center align-items-center gap-2 md:gap-4">
+          <span>© 2024 <strong>Serviteca Pro</strong></span>
+          <span className="hidden md:inline">|</span>
+          <span>Sistema de Gestión de Taller Mecánico</span>
+          <span className="hidden md:inline">|</span>
+          <span className="text-xs">v1.0.0</span>
+        </div>
       </footer>
     </div>
   );

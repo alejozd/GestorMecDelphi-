@@ -100,6 +100,15 @@ export interface FiltroOrden {
 export type OrdenesResponse = ApiResponse<PaginatedData<OrdenTrabajo>>;
 export type OrdenResponse = ApiResponse<OrdenTrabajo>;
 
+export interface OrdenStats {
+  totalOrdenes: number;
+  totalFacturado: number;
+  porEstado: Array<{ otm_estado: number; _count: number }>;
+  porTipo: Array<{ otm_clase_doc: number; _count: number; _sum: { otm_vr_total: number | null } }>;
+}
+
+export type OrdenStatsResponse = ApiResponse<OrdenStats>;
+
 export interface FinalizarOrdenData {
   otm_clase_doc: number; // 1=Factura, 2=Pedido/Recibo
   otm_estado: number; // 1=Finalizado
@@ -196,6 +205,17 @@ class OrdenTrabajoService {
     return apiService.get(`${this.endpoint}/${otmCodi}/imprimir`, {
       responseType: 'blob',
     });
+  }
+
+  /**
+   * Obtener estadísticas de órdenes
+   */
+  async getStats(fechaDesde?: string, fechaHasta?: string): Promise<OrdenStatsResponse> {
+    const params = new URLSearchParams();
+    if (fechaDesde) params.append('fecha_desde', fechaDesde);
+    if (fechaHasta) params.append('fecha_hasta', fechaHasta);
+
+    return apiService.get<OrdenStatsResponse>(`${this.endpoint}/stats?${params.toString()}`);
   }
 
   /**
