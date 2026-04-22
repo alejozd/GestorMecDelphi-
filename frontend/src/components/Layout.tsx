@@ -25,7 +25,7 @@ export default function Layout({ children }: LayoutProps) {
     // Construir menú basado en permisos (placeholder - implementar según backend)
     const items: MenuItem[] = [
       {
-        label: 'Inicio',
+        label: 'Dashboard',
         icon: 'pi pi-home',
         command: () => navigate('/'),
       },
@@ -162,22 +162,25 @@ export default function Layout({ children }: LayoutProps) {
   );
 
   const end = (
-    <div className="flex align-items-center gap-3">
-      <div className="flex flex-column align-items-end hidden sm:flex">
-        <span className="text-sm font-medium text-900">{usuario?.nombre}</span>
-        <small className="text-secondary text-xs">{usuario?.usuario}</small>
+    <div className="flex align-items-center">
+      <div className="flex flex-column align-items-end mr-3 hidden lg:flex">
+        <span className="text-sm font-bold text-900">{usuario?.nombre}</span>
+        <span className="text-xs text-secondary">@{usuario?.usuario}</span>
       </div>
       <Avatar 
         icon="pi pi-user" 
         shape="circle" 
-        className="bg-primary-reverse text-primary border-1 border-primary"
+        className="bg-blue-50 text-primary border-1 border-blue-200"
+        style={{ width: '35px', height: '35px' }}
       />
-      <Button
-        icon="pi pi-sign-out"
-        label="Salir"
-        onClick={logout}
-        className="p-button-text p-button-secondary p-button-sm"
-      />
+      <div className="ml-3 pl-3 border-left-1 surface-border">
+        <Button
+          icon="pi pi-power-off"
+          label="Salir"
+          onClick={logout}
+          className="p-button-danger p-button-text p-button-sm font-bold"
+        />
+      </div>
     </div>
   );
 

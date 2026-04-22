@@ -58,6 +58,32 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Estilos para Menubar */
+.p-menubar {
+  border: none !important;
+  background: var(--surface-card) !important;
+  border-radius: 0 !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link {
+  padding: 0.5rem 0.75rem !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
+  color: var(--text-color) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-icon {
+  margin-right: 0.5rem !important;
+  color: var(--secondary-color) !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link:hover {
+  background: var(--surface-ground) !important;
+}
+
 /* Estilos para tablas */
 .p-datatable .p-datatable-header {
   background: #f8f9fa;

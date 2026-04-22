@@ -144,48 +144,42 @@ export default function Dashboard() {
       title: 'Órdenes Hoy',
       value: stats.ordenesHoy,
       icon: 'pi pi-file-edit',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      color: 'blue',
       action: () => navigate('/ordenes'),
     },
     {
       title: 'En Proceso',
       value: stats.ordenesEnProceso,
-      icon: 'pi pi-spin pi-spinner',
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-50',
+      icon: 'pi pi-sync',
+      color: 'orange',
       action: () => navigate('/ordenes?estado=0'),
     },
     {
       title: 'Facturas Mes',
       value: stats.facturasMes,
       icon: 'pi pi-file-pdf',
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
+      color: 'green',
       action: () => navigate('/documentos/facturas'),
     },
     {
       title: 'Pedidos Mes',
       value: stats.pedidosMes,
       icon: 'pi pi-file-o',
-      color: 'text-cyan-600',
-      bgColor: 'bg-cyan-50',
+      color: 'cyan',
       action: () => navigate('/documentos/pedidos'),
     },
     {
       title: 'Stock Bajo',
       value: stats.productosStockBajo,
       icon: 'pi pi-exclamation-triangle',
-      color: 'text-red-600',
-      bgColor: 'bg-red-50',
+      color: 'red',
       action: () => navigate('/stock?filtro=bajo'),
     },
     {
       title: 'Clientes Nuevos',
       value: stats.clientesNuevosMes,
       icon: 'pi pi-users',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      color: 'purple',
       action: () => navigate('/clientes'),
     },
   ];
@@ -202,16 +196,16 @@ export default function Dashboard() {
         {statCards.map((stat, index) => (
           <div key={index} className="col-12 md:col-4 lg:col-2 p-2">
             <Card
-              className="h-full cursor-pointer hover:shadow-3 transition-all border-none border-left-3"
-              style={{ borderLeftColor: `var(--${stat.color.split('-')[1]}-500)` }}
+              className="h-full cursor-pointer hover:shadow-3 transition-all border-none border-top-3"
+              style={{ borderTopColor: `var(--${stat.color}-500)` }}
               onClick={stat.action}
             >
               <div className="flex flex-column align-items-center justify-content-center py-2">
-                <div className={`${stat.bgColor} ${stat.color} border-round-circle p-3 mb-3 flex align-items-center justify-content-center`} style={{ width: '60px', height: '60px' }}>
+                <div className={`bg-${stat.color}-50 text-${stat.color}-600 border-round-circle p-3 mb-3 flex align-items-center justify-content-center`} style={{ width: '60px', height: '60px' }}>
                   <i className={`${stat.icon}`} style={{ fontSize: '1.5rem' }}></i>
                 </div>
                 <span className="text-4xl font-bold text-900">{stat.value}</span>
-                <span className="text-sm font-medium text-secondary text-center mt-2 uppercase tracking-wider">{stat.title}</span>
+                <span className="text-xs font-bold text-secondary text-center mt-2 uppercase tracking-wider">{stat.title}</span>
               </div>
             </Card>
           </div>
