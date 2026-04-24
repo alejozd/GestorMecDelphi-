@@ -10,6 +10,7 @@ interface MenuItem {
   icon?: string;
   command?: () => void;
   items?: MenuItem[];
+  className?: string;
 }
 
 interface LayoutProps {
@@ -27,11 +28,13 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Dashboard',
         icon: 'pi pi-home',
+        className: 'nav-dashboard',
         command: () => navigate('/'),
       },
       {
         label: 'Clientes',
         icon: 'pi pi-users',
+        className: 'nav-clientes',
         items: [
           {
             label: 'Listado de Clientes',
@@ -53,6 +56,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Inventario',
         icon: 'pi pi-box',
+        className: 'nav-inventario',
         items: [
           {
             label: 'Productos',
@@ -74,6 +78,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Órdenes',
         icon: 'pi pi-file-edit',
+        className: 'nav-ordenes',
         items: [
           {
             label: 'Nueva Orden',
@@ -90,6 +95,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Documentos',
         icon: 'pi pi-file',
+        className: 'nav-documentos',
         items: [
           {
             label: 'Facturas',
@@ -106,11 +112,13 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Historial',
         icon: 'pi pi-history',
+        className: 'nav-historial',
         command: () => navigate('/historial'),
       },
       {
         label: 'Stock',
         icon: 'pi pi-chart-bar',
+        className: 'nav-stock',
         items: [
           {
             label: 'Consulta de Stock',
@@ -132,6 +140,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Reportes',
         icon: 'pi pi-chart-line',
+        className: 'nav-reportes',
         items: [
           {
             label: 'Ventas por Período',
