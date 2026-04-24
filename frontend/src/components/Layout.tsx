@@ -162,28 +162,29 @@ export default function Layout({ children }: LayoutProps) {
   );
 
   const end = (
-    <div className="flex align-items-center gap-2">
-      <div className="flex align-items-center py-1 px-2 border-round">
-        <div className="flex flex-column align-items-end mr-3 hidden sm:flex">
-          <span className="text-sm font-bold text-900 line-height-2">{usuario?.nombre}</span>
-          <span className="text-xs text-500 line-height-1">@{usuario?.usuario}</span>
+    <div className="flex align-items-center gap-1 sm:gap-3">
+      <div className="flex align-items-center">
+        <div className="flex flex-column align-items-end mr-2 hidden sm:flex">
+          <span className="text-sm font-bold text-900 line-height-1 mb-1">{usuario?.nombre}</span>
+          <span className="text-xs text-600 line-height-1">@{usuario?.usuario}</span>
         </div>
         <Avatar
           icon="pi pi-user"
           shape="circle"
-          className="bg-primary-50 text-primary border-1 border-primary-100"
+          className="bg-blue-50 text-blue-600 border-1 border-blue-100"
+          style={{ width: '32px', height: '32px' }}
         />
       </div>
 
-      <div className="border-left-1 surface-border h-2rem mx-2"></div>
+      <div className="border-left-1 surface-border h-2rem mx-1"></div>
 
       <Button
-        icon="pi pi-power-off"
-        label="Salir"
+        icon="pi pi-sign-out"
+        label="Cerrar Sesión"
         onClick={logout}
         severity="danger"
         text
-        className="p-button-rounded p-button-sm font-bold"
+        className="p-button-sm font-bold px-2"
       />
     </div>
   );
