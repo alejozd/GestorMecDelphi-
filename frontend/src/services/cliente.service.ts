@@ -57,7 +57,19 @@ export interface PaginatedData<T> {
   };
 }
 
-export type ClientesResponse = ApiResponse<PaginatedData<Cliente>>;
+export interface PaginatedResponse<T> {
+  success: boolean;
+  message: string;
+  data: T[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+export type ClientesResponse = PaginatedResponse<Cliente>;
 export type ClienteResponse = ApiResponse<Cliente>;
 
 class ClienteService {
@@ -127,7 +139,7 @@ class ClienteService {
     if (limit) params.append('limit', String(limit));
     
     const response = await apiService.get<ClientesResponse>(`${this.endpoint}/search?${params.toString()}`);
-    return response.data.data;
+    return response.data;
   }
 
   /**
