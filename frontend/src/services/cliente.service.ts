@@ -146,7 +146,7 @@ class ClienteService {
    * Obtener tipos de documento
    */
   async getTiposDocumento() {
-    return apiService.get<Array<{ td_codi: number; td_abreviado: string; td_nombre: string }>>(
+    return apiService.get<ApiResponse<Array<{ td_codi: number; td_abreviado: string; td_nombre: string }>>>(
       '/catalogos/tipos-documento'
     );
   }
@@ -156,7 +156,7 @@ class ClienteService {
    */
   async getCiudades(departamentoId?: number) {
     const params = departamentoId ? `?dep_codigo=${departamentoId}` : '';
-    return apiService.get<Array<{ ciu_codi: number; ciu_nombre: string; dep_codigo?: number }>>(
+    return apiService.get<ApiResponse<Array<{ ciu_codi: number; ciu_nombre: string; dep_codigo?: number }>>>(
       `/catalogos/ciudades${params}`
     );
   }

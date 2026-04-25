@@ -62,8 +62,8 @@ const ClienteForm: React.FC = () => {
           clienteService.getTiposDocumento(),
           clienteService.getCiudades()
         ]);
-        setTiposDocumento(resTipos as any);
-        setCiudades(resCiudades as any);
+        setTiposDocumento(resTipos.data);
+        setCiudades(resCiudades.data);
       } catch (error) {
         toast.current?.show({
           severity: 'error',
