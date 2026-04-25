@@ -345,3 +345,47 @@ body {
   color: var(--primary-color);
   font-weight: 700;
 }
+
+/* Input Group Polishing */
+.p-inputgroup {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.p-inputgroup-addon {
+  background-color: var(--blue-50);
+  border: 1px solid var(--surface-300);
+  color: var(--primary-color);
+  min-width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-inputgroup .p-inputtext,
+.p-inputgroup .p-dropdown {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.p-inputgroup:focus-within {
+  box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.15);
+}
+
+.p-inputgroup:focus-within .p-inputgroup-addon {
+  border-color: var(--primary-color);
+  background-color: var(--blue-100);
+}
+
+/* Field Spacing */
+.field {
+  margin-bottom: 1.5rem !important;
+}
+
+.field label {
+  font-weight: 600;
+  color: var(--surface-700);
+  margin-bottom: 0.5rem;
+  display: block;
+}
