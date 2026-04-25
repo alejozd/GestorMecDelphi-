@@ -204,7 +204,7 @@ export default function Dashboard() {
         {statCards.map((stat, index) => (
           <div key={index} className="col-12 md:col-4 lg:col-2 p-2">
             <Card
-              className="h-full cursor-pointer hover:shadow-3 transition-all border-none border-top-3"
+              className="h-full cursor-pointer transition-all border-none border-top-3 kpi-card"
               style={{ borderTopColor: `var(--${stat.color}-500)` }}
               onClick={stat.action}
             >
@@ -239,36 +239,61 @@ export default function Dashboard() {
         <div className="col-12 lg:col-4 p-2">
           <Card title="Accesos Rápidos" className="h-full shadow-1">
             <div className="flex flex-column gap-3">
-              <Button
-                label="Nueva Orden de Trabajo"
-                icon="pi pi-plus"
-                className="w-full text-left justify-content-start"
+              <button
+                className="quick-access-btn primary"
                 onClick={() => navigate('/ordenes/nueva')}
-              />
-              <Button
-                label="Nuevo Cliente"
-                icon="pi pi-user-plus"
-                severity="secondary"
-                outlined
-                className="w-full text-left justify-content-start"
+              >
+                <div className="icon-wrapper">
+                  <i className="pi pi-plus"></i>
+                </div>
+                <div className="text-wrapper">
+                  <span className="btn-title">Nueva Orden</span>
+                  <span className="btn-subtitle">Registrar ingreso de vehículo</span>
+                </div>
+                <i className="pi pi-chevron-right arrow-icon"></i>
+              </button>
+
+              <button
+                className="quick-access-btn secondary"
                 onClick={() => navigate('/clientes/nuevo')}
-              />
-              <Button
-                label="Consultar Historial"
-                icon="pi pi-history"
-                severity="secondary"
-                outlined
-                className="w-full text-left justify-content-start"
+              >
+                <div className="icon-wrapper">
+                  <i className="pi pi-user-plus"></i>
+                </div>
+                <div className="text-wrapper">
+                  <span className="btn-title">Nuevo Cliente</span>
+                  <span className="btn-subtitle">Crear ficha de cliente y vehículo</span>
+                </div>
+                <i className="pi pi-chevron-right arrow-icon"></i>
+              </button>
+
+              <button
+                className="quick-access-btn secondary"
                 onClick={() => navigate('/historial')}
-              />
-              <Button
-                label="Reporte de Stock"
-                icon="pi pi-chart-bar"
-                severity="secondary"
-                outlined
-                className="w-full text-left justify-content-start"
+              >
+                <div className="icon-wrapper">
+                  <i className="pi pi-history"></i>
+                </div>
+                <div className="text-wrapper">
+                  <span className="btn-title">Historial</span>
+                  <span className="btn-subtitle">Consultar servicios anteriores</span>
+                </div>
+                <i className="pi pi-chevron-right arrow-icon"></i>
+              </button>
+
+              <button
+                className="quick-access-btn secondary"
                 onClick={() => navigate('/stock')}
-              />
+              >
+                <div className="icon-wrapper">
+                  <i className="pi pi-chart-bar"></i>
+                </div>
+                <div className="text-wrapper">
+                  <span className="btn-title">Reporte Stock</span>
+                  <span className="btn-subtitle">Ver disponibilidad de repuestos</span>
+                </div>
+                <i className="pi pi-chevron-right arrow-icon"></i>
+              </button>
             </div>
           </Card>
         </div>

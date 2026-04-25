@@ -129,6 +129,99 @@ body {
   margin-left: 0.75rem;
 }
 
+/* Animaciones para tarjetas KPI */
+.kpi-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -5px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Botones de acceso rápido modernos */
+.quick-access-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.quick-access-btn:hover {
+  background: var(--surface-ground);
+  border-color: var(--primary-color);
+  transform: translateX(4px);
+}
+
+.quick-access-btn .icon-wrapper {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  background: var(--surface-ground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  transition: all 0.2s ease;
+}
+
+.quick-access-btn .icon-wrapper i {
+  font-size: 1.25rem;
+  color: var(--secondary-color);
+}
+
+.quick-access-btn:hover .icon-wrapper {
+  background: var(--primary-color);
+}
+
+.quick-access-btn:hover .icon-wrapper i {
+  color: white;
+}
+
+.quick-access-btn .text-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.quick-access-btn .btn-title {
+  font-weight: 700;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.quick-access-btn .btn-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  margin-top: 2px;
+}
+
+.quick-access-btn .arrow-icon {
+  color: var(--text-color-light);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.quick-access-btn:hover .arrow-icon {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.quick-access-btn.primary:hover {
+  border-color: var(--accent-color);
+}
+
+.quick-access-btn.primary:hover .icon-wrapper {
+  background: var(--accent-color);
+}
+
 /* Estilos para tablas */
 .p-datatable .p-datatable-header {
   background: #f8f9fa;
