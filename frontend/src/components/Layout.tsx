@@ -204,7 +204,7 @@ export default function Layout({ children }: LayoutProps) {
         <Menubar model={menuItems} start={start} end={end} className="border-none px-4 py-2" />
       </header>
       
-      <main className="flex-grow-1 p-3 md:p-4 fade-in max-w-screen-2xl mx-auto w-full">
+      <main className="flex-grow-1 p-4 md:p-5 fade-in max-w-screen-2xl mx-auto w-full">
         {children}
       </main>
 

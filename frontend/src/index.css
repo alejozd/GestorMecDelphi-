@@ -33,16 +33,18 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: var(--font-family);
   background-color: var(--surface-ground);
   color: var(--text-color);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -243,6 +245,33 @@ body {
   width: 100%;
 }
 
+.p-inputtext {
+  padding: 0.75rem 1rem !important;
+}
+
+.p-dropdown {
+  padding: 0.25rem 0.5rem !important;
+}
+
+.p-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.p-button.p-button-sm {
+  padding: 0.5rem 1rem;
+}
+
+.p-button.p-button-lg {
+  padding: 1rem 2rem;
+}
+
+.p-button.p-button-text {
+  background: transparent;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .card {
@@ -388,4 +417,43 @@ body {
   color: var(--surface-700);
   margin-bottom: 0.5rem;
   display: block;
+}
+
+/* Global Icon Spacing Fix */
+.pi {
+  margin-right: 0.5rem;
+}
+
+/* Fix for icons inside buttons where PrimeReact handles spacing */
+.p-button .pi {
+  margin-right: 0;
+}
+.p-button-icon-left {
+  margin-right: 0.75rem !important;
+}
+.p-button-icon-right {
+  margin-left: 0.75rem !important;
+}
+
+/* Fix for icons in InputGroups */
+.p-inputgroup-addon .pi {
+  margin-right: 0;
+}
+
+/* Table Padding & Spacing */
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 1rem 1.25rem !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  padding: 1rem 1.25rem !important;
+}
+
+/* Card internal padding consistency */
+.p-card .p-card-body {
+  padding: 1.5rem !important;
+}
+
+.p-card .p-card-content {
+  padding: 0 !important;
 }
