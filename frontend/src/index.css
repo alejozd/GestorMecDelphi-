@@ -319,3 +319,29 @@ body {
   background-color: var(--surface-50);
   padding: 0.5rem;
 }
+
+/* Modern Form Elements */
+.p-inputtext:focus, .p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.15) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.p-inputtext {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Specific Card Headers */
+.bg-primary-reverse {
+  background: linear-gradient(135deg, var(--blue-50) 0%, #ffffff 100%);
+}
+
+.field label {
+  font-size: 0.875rem;
+}
+
+/* Paginator Improvements */
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: var(--blue-50);
+  color: var(--primary-color);
+  font-weight: 700;
+}

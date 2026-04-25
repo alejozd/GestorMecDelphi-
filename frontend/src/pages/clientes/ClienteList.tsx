@@ -120,7 +120,10 @@ const ClienteList: React.FC = () => {
           text
           severity="info"
           tooltip="Ver detalles"
-          onClick={() => navigate(`/clientes/${rowData.cli_codi}`)}
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/clientes/${rowData.cli_codi}`);
+          }}
         />
         <Button
           icon="pi pi-pencil"
@@ -128,7 +131,10 @@ const ClienteList: React.FC = () => {
           text
           severity="warning"
           tooltip="Editar"
-          onClick={() => navigate(`/clientes/editar/${rowData.cli_codi}`)}
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/clientes/editar/${rowData.cli_codi}`);
+          }}
         />
         <Button
           icon="pi pi-trash"
@@ -136,7 +142,10 @@ const ClienteList: React.FC = () => {
           text
           severity="danger"
           tooltip="Eliminar"
-          onClick={() => confirmDelete(rowData)}
+          onClick={(e) => {
+            e.stopPropagation();
+            confirmDelete(rowData);
+          }}
         />
       </div>
     );
@@ -290,6 +299,7 @@ const ClienteList: React.FC = () => {
                 currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} clientes"
                 rowsPerPageOptions={[10, 25, 50]}
                 rowClassName={() => 'cursor-pointer'}
+                onRowClick={(e) => navigate(`/clientes/${e.data.cli_codi}`)}
               >
                 <Column
                   header="Nombre del Cliente"
