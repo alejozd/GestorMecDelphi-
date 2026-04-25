@@ -8,6 +8,7 @@ import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Card } from 'primereact/card';
+import Layout from '../../components/Layout';
 import { clienteService, Cliente } from '../../services/cliente.service';
 
 const ClienteList: React.FC = () => {
@@ -208,40 +209,42 @@ const ClienteList: React.FC = () => {
   );
 
   return (
-    <div className="clientes-list-container animate-fade-in">
-      <Toast ref={toast} />
-      <ConfirmDialog />
+    <Layout>
+      <div className="clientes-list-container animate-fade-in">
+        <Toast ref={toast} />
+        <ConfirmDialog />
 
-      <Card className="mb-4 shadow-2 border-round-xl overflow-hidden">
-        <Toolbar className="mb-4 bg-transparent border-none p-0" left={leftToolbarTemplate} right={rightToolbarTemplate} />
+        <Card className="mb-4 shadow-2 border-round-xl overflow-hidden">
+          <Toolbar className="mb-4 bg-transparent border-none p-0" left={leftToolbarTemplate} right={rightToolbarTemplate} />
 
-        <DataTable
-          value={clientes}
-          lazy
-          paginator
-          first={lazyParams.first}
-          rows={lazyParams.rows}
-          totalRecords={totalRecords}
-          onPage={onPage}
-          loading={loading}
-          dataKey="cli_codi"
-          header={header}
-          responsiveLayout="stack"
-          breakpoint="960px"
-          className="p-datatable-sm"
-          emptyMessage="No se encontraron clientes."
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} clientes"
-          rowsPerPageOptions={[10, 25, 50]}
-        >
-          <Column field="cli_nombre" header="Nombre" sortable className="font-bold text-primary" style={{ minWidth: '14rem' }} />
-          <Column header="Documento" body={documentTemplate} style={{ minWidth: '10rem' }} />
-          <Column header="Contacto" body={contactTemplate} style={{ minWidth: '14rem' }} />
-          <Column field="ciudad.ciu_nombre" header="Ciudad" style={{ minWidth: '10rem' }} />
-          <Column body={actionTemplate} exportable={false} style={{ minWidth: '12rem' }} />
-        </DataTable>
-      </Card>
-    </div>
+          <DataTable
+            value={clientes}
+            lazy
+            paginator
+            first={lazyParams.first}
+            rows={lazyParams.rows}
+            totalRecords={totalRecords}
+            onPage={onPage}
+            loading={loading}
+            dataKey="cli_codi"
+            header={header}
+            responsiveLayout="stack"
+            breakpoint="960px"
+            className="p-datatable-sm"
+            emptyMessage="No se encontraron clientes."
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} clientes"
+            rowsPerPageOptions={[10, 25, 50]}
+          >
+            <Column field="cli_nombre" header="Nombre" sortable className="font-bold text-primary" style={{ minWidth: '14rem' }} />
+            <Column header="Documento" body={documentTemplate} style={{ minWidth: '10rem' }} />
+            <Column header="Contacto" body={contactTemplate} style={{ minWidth: '14rem' }} />
+            <Column field="ciudad.ciu_nombre" header="Ciudad" style={{ minWidth: '10rem' }} />
+            <Column body={actionTemplate} exportable={false} style={{ minWidth: '12rem' }} />
+          </DataTable>
+        </Card>
+      </div>
+    </Layout>
   );
 };
 

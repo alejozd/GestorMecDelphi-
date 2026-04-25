@@ -9,17 +9,21 @@ import ClienteForm from './pages/clientes/ClienteForm';
 import ClienteDetail from './pages/clientes/ClienteDetail';
 
 // Placeholders para páginas pendientes de implementar
+import Layout from './components/Layout';
+
 const PlaceholderPage = ({ title }: { title: string }) => (
-  <div className="card">
-    <h2 className="text-2xl font-bold mb-3">{title}</h2>
-    <p className="text-secondary">
-      Página en desarrollo - Implementar según Manual.docx
-    </p>
-    <div className="flex gap-2 mt-4">
-      <i className="pi pi-info-circle"></i>
-      <span>Esta página corresponde a una ventana del sistema legacy. Revisar documentación para campos y validaciones específicas.</span>
+  <Layout>
+    <div className="card">
+      <h2 className="text-2xl font-bold mb-3">{title}</h2>
+      <p className="text-secondary">
+        Página en desarrollo - Implementar según Manual.docx
+      </p>
+      <div className="flex gap-2 mt-4">
+        <i className="pi pi-info-circle"></i>
+        <span>Esta página corresponde a una ventana del sistema legacy. Revisar documentación para campos y validaciones específicas.</span>
+      </div>
     </div>
-  </div>
+  </Layout>
 );
 
 export const router = createBrowserRouter([
