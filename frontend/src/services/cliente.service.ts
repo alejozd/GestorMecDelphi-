@@ -40,9 +40,9 @@ export interface ClienteUpdate extends Partial<ClienteCreate> {
 }
 
 export interface FiltroCliente {
-  pagina?: number;
-  limite?: number;
-  busqueda?: string;
+  page?: number;
+  limit?: number;
+  search?: string;
   cod_tipdo?: number;
   ciu_codi?: number;
 }
@@ -69,9 +69,9 @@ class ClienteService {
   async getClientes(filtros?: FiltroCliente): Promise<ClientesResponse> {
     const params = new URLSearchParams();
     
-    if (filtros?.pagina) params.append('pagina', String(filtros.pagina));
-    if (filtros?.limite) params.append('limite', String(filtros.limite));
-    if (filtros?.busqueda) params.append('busqueda', filtros.busqueda);
+    if (filtros?.page) params.append('page', String(filtros.page));
+    if (filtros?.limit) params.append('limit', String(filtros.limit));
+    if (filtros?.search) params.append('search', filtros.search);
     if (filtros?.cod_tipdo) params.append('cod_tipdo', String(filtros.cod_tipdo));
     if (filtros?.ciu_codi) params.append('ciu_codi', String(filtros.ciu_codi));
 
@@ -121,10 +121,10 @@ class ClienteService {
   /**
    * Buscar clientes por término (autocomplete)
    */
-  async searchClientes(term: string, limite?: number): Promise<Cliente[]> {
+  async searchClientes(term: string, limit?: number): Promise<Cliente[]> {
     const params = new URLSearchParams();
-    params.append('busqueda', term);
-    if (limite) params.append('limite', String(limite));
+    params.append('search', term);
+    if (limit) params.append('limit', String(limit));
     
     const response = await apiService.get<ClientesResponse>(`${this.endpoint}/search?${params.toString()}`);
     return response.data.data;

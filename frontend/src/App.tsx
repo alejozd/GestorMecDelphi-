@@ -4,6 +4,9 @@ import { PublicRoute, ProtectedRoute } from './components/ProtectedRoute';
 // Páginas
 import Login from './pages/auth/Login';
 import Dashboard from './pages/Dashboard';
+import ClienteList from './pages/clientes/ClienteList';
+import ClienteForm from './pages/clientes/ClienteForm';
+import ClienteDetail from './pages/clientes/ClienteDetail';
 
 // Placeholders para páginas pendientes de implementar
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -41,7 +44,7 @@ export const router = createBrowserRouter([
     path: '/clientes',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Listado de Clientes" />
+        <ClienteList />
       </ProtectedRoute>
     ),
   },
@@ -49,7 +52,7 @@ export const router = createBrowserRouter([
     path: '/clientes/nuevo',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Nuevo Cliente" />
+        <ClienteForm />
       </ProtectedRoute>
     ),
   },
@@ -57,7 +60,15 @@ export const router = createBrowserRouter([
     path: '/clientes/editar/:id',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Editar Cliente" />
+        <ClienteForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/clientes/:id',
+    element: (
+      <ProtectedRoute>
+        <ClienteDetail />
       </ProtectedRoute>
     ),
   },

@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { clientesService } from '../services/clientes.service.js';
-import { AuthRequest, ApiResponse } from '../types/index.js';
+import { AuthRequest, ApiResponse, PaginatedResponse } from '../types/index.js';
 
 /**
  * Controlador para gestión de clientes
@@ -10,7 +10,7 @@ export class ClientesController {
    * Obtiene lista de clientes con paginación y filtros
    * GET /api/clientes?page=1&limit=10&search=nombre
    */
-  async findAll(req: AuthRequest, res: Response<ApiResponse>) {
+  async findAll(req: AuthRequest, res: Response) {
     try {
       const { page, limit, search, cod_tipdo } = req.query;
 
@@ -185,7 +185,7 @@ export class ClientesController {
    * Obtiene estadísticas de clientes
    * GET /api/clientes/stats
    */
-  async getStats(req: AuthRequest, res: Response<ApiResponse>) {
+  async getStats(_req: AuthRequest, res: Response<ApiResponse>) {
     try {
       const stats = await clientesService.getStats();
 

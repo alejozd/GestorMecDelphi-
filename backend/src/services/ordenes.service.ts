@@ -320,7 +320,7 @@ export class OrdenesService {
     });
 
     // Calcular totales del documento
-    const documentTotals = calculateDocumentTotals(detallesCalculados, applyIva);
+    const documentTotals = calculateDocumentTotals(detallesCalculados as any, applyIva);
 
     // Obtener próximo consecutivo
     const otm_nume = await this.getNextConsecutive(otm_clase_doc);
