@@ -457,3 +457,44 @@ body {
 .p-card .p-card-content {
   padding: 0 !important;
 }
+
+/* IconField Alignment & Styling */
+.p-icon-field {
+  width: 100%;
+}
+
+.p-icon-field-left > .p-input-icon {
+  left: 0.75rem;
+  color: var(--blue-500);
+  font-size: 1rem;
+}
+
+.p-icon-field-left > .p-inputtext,
+.p-icon-field-left > .p-dropdown,
+.p-icon-field-left > .p-inputtextarea {
+  padding-left: 2.5rem !important;
+}
+
+.p-inputtext, .p-dropdown, .p-inputtextarea {
+  border-radius: 10px !important;
+  border: 1px solid var(--surface-300) !important;
+  background: #ffffff !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.p-inputtext:hover, .p-dropdown:hover {
+  border-color: var(--blue-400) !important;
+}
+
+.p-inputtext:focus, .p-dropdown.p-focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1) !important;
+}
+
+/* Floating labels or standard labels spacing */
+.field label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}

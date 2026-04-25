@@ -7,7 +7,7 @@ import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
-import { InputGroup, InputGroupAddon } from '../../components/InputGroupPlaceholder';
+import { IconField, InputIcon } from '../../components/InputIconWrapper';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Toast } from 'primereact/toast';
 import { Divider } from 'primereact/divider';
@@ -196,10 +196,8 @@ const ClienteForm: React.FC = () => {
                 name="cod_tipdo"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-id-card text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-id-card text-blue-500" />
                     <Dropdown
                       id={field.name}
                       value={field.value}
@@ -208,9 +206,9 @@ const ClienteForm: React.FC = () => {
                       optionLabel="td_nombre"
                       optionValue="td_codi"
                       placeholder="Seleccione tipo"
-                      className={classNames({ 'p-invalid': errors.cod_tipdo })}
+                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cod_tipdo })}
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
               {errors.cod_tipdo && <small className="p-error ml-1 mt-1 block">{errors.cod_tipdo.message}</small>}
@@ -222,17 +220,15 @@ const ClienteForm: React.FC = () => {
                 name="cli_numdoc"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-hashtag text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-hashtag text-blue-500" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames({ 'p-invalid': errors.cli_numdoc })}
+                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_numdoc })}
                       placeholder="Ej: 1020304050"
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
               {errors.cli_numdoc && <small className="p-error ml-1 mt-1 block">{errors.cli_numdoc.message}</small>}
@@ -244,17 +240,15 @@ const ClienteForm: React.FC = () => {
                 name="cli_nombre"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-user text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-user text-blue-500" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames({ 'p-invalid': errors.cli_nombre })}
+                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_nombre })}
                       placeholder="Ej: Juan Pérez"
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
               {errors.cli_nombre && <small className="p-error ml-1 mt-1 block">{errors.cli_nombre.message}</small>}
@@ -274,17 +268,15 @@ const ClienteForm: React.FC = () => {
                 name="cli_tel_movil"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-mobile text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-mobile text-blue-500" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames({ 'p-invalid': errors.cli_tel_movil })}
+                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_tel_movil })}
                       placeholder="10 dígitos"
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
               {errors.cli_tel_movil && <small className="p-error ml-1 mt-1 block">{errors.cli_tel_movil.message}</small>}
@@ -296,17 +288,15 @@ const ClienteForm: React.FC = () => {
                 name="cli_correoe"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-envelope text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-envelope text-blue-500" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames({ 'p-invalid': errors.cli_correoe })}
+                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_correoe })}
                       placeholder="ejemplo@correo.com"
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
               {errors.cli_correoe && <small className="p-error ml-1 mt-1 block">{errors.cli_correoe.message}</small>}
@@ -326,10 +316,8 @@ const ClienteForm: React.FC = () => {
                 name="ciu_codi"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-map text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-map text-blue-500" />
                     <Dropdown
                       id={field.name}
                       value={field.value}
@@ -339,9 +327,9 @@ const ClienteForm: React.FC = () => {
                       optionValue="ciu_codi"
                       filter
                       placeholder="Seleccione ciudad"
-                      className={classNames({ 'p-invalid': errors.ciu_codi })}
+                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.ciu_codi })}
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
               {errors.ciu_codi && <small className="p-error ml-1 mt-1 block">{errors.ciu_codi.message}</small>}
@@ -353,16 +341,15 @@ const ClienteForm: React.FC = () => {
                 name="cli_direccion"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-directions text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-directions text-blue-500" />
                     <InputText
                       id={field.name}
                       {...field}
+                      className="w-full border-round-xl"
                       placeholder="Calle/Carrera #..."
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
             </div>
@@ -373,18 +360,17 @@ const ClienteForm: React.FC = () => {
                 name="cli_observacion"
                 control={control}
                 render={({ field }) => (
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <i className="pi pi-comment text-primary" />
-                    </InputGroupAddon>
+                  <IconField>
+                    <InputIcon className="pi pi-comment text-blue-500" />
                     <InputTextarea
                       id={field.name}
                       {...field}
                       rows={3}
                       autoResize
+                      className="w-full border-round-xl"
                       placeholder="Detalles sobre preferencias del cliente, convenios, etc."
                     />
-                  </InputGroup>
+                  </IconField>
                 )}
               />
             </div>
