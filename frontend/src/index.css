@@ -120,6 +120,15 @@ body {
   color: var(--primary-color) !important;
 }
 
+/* Espaciado para iconos en botones */
+.p-button .p-button-icon-left {
+  margin-right: 0.75rem;
+}
+
+.p-button .p-button-icon-right {
+  margin-left: 0.75rem;
+}
+
 /* Estilos para tablas */
 .p-datatable .p-datatable-header {
   background: #f8f9fa;
