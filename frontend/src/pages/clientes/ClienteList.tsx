@@ -10,6 +10,7 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Card } from 'primereact/card';
 import { Tag } from 'primereact/tag';
 import { Avatar } from 'primereact/avatar';
+import { IconField, InputIcon } from '../../components/InputIconWrapper';
 import Layout from '../../components/Layout';
 import { clienteService, Cliente } from '../../services/cliente.service';
 
@@ -239,15 +240,15 @@ const ClienteList: React.FC = () => {
         </div>
       </div>
       <div className="flex gap-2 w-full sm:w-auto">
-        <span className="p-input-icon-left w-full sm:w-20rem">
-          <i className="pi pi-search" />
+        <IconField className="w-full sm:w-20rem">
+          <InputIcon className="pi pi-search" />
           <InputText
             type="search"
             onInput={onGlobalFilterChange}
             placeholder="Buscar por nombre, documento..."
-            className="w-full border-round-xl"
+            className="w-full"
           />
-        </span>
+        </IconField>
         <Button
           icon="pi pi-filter"
           outlined
