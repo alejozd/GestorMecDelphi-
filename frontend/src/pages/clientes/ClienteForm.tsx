@@ -7,7 +7,8 @@ import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
-import { IconField, InputIcon } from '../../components/InputIconWrapper';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Toast } from 'primereact/toast';
 import { Divider } from 'primereact/divider';
@@ -196,7 +197,7 @@ const ClienteForm: React.FC = () => {
                 name="cod_tipdo"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-id-card" />
                     <Dropdown
                       id={field.name}
@@ -220,7 +221,7 @@ const ClienteForm: React.FC = () => {
                 name="cli_numdoc"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-hashtag" />
                     <InputText
                       id={field.name}
@@ -240,7 +241,7 @@ const ClienteForm: React.FC = () => {
                 name="cli_nombre"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-user" />
                     <InputText
                       id={field.name}
@@ -268,7 +269,7 @@ const ClienteForm: React.FC = () => {
                 name="cli_tel_movil"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-mobile" />
                     <InputText
                       id={field.name}
@@ -288,7 +289,7 @@ const ClienteForm: React.FC = () => {
                 name="cli_correoe"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-envelope" />
                     <InputText
                       id={field.name}
@@ -316,7 +317,7 @@ const ClienteForm: React.FC = () => {
                 name="ciu_codi"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-map" />
                     <Dropdown
                       id={field.name}
@@ -341,7 +342,7 @@ const ClienteForm: React.FC = () => {
                 name="cli_direccion"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-directions" />
                     <InputText
                       id={field.name}
@@ -359,7 +360,7 @@ const ClienteForm: React.FC = () => {
                 name="cli_observacion"
                 control={control}
                 render={({ field }) => (
-                  <IconField>
+                  <IconField iconPosition="left">
                     <InputIcon className="pi pi-comment" />
                     <InputTextarea
                       id={field.name}

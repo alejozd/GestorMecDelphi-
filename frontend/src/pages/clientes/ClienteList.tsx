@@ -10,7 +10,8 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Card } from 'primereact/card';
 import { Tag } from 'primereact/tag';
 import { Avatar } from 'primereact/avatar';
-import { IconField, InputIcon } from '../../components/InputIconWrapper';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import Layout from '../../components/Layout';
 import { clienteService, Cliente } from '../../services/cliente.service';
 
@@ -240,7 +241,7 @@ const ClienteList: React.FC = () => {
         </div>
       </div>
       <div className="flex gap-2 w-full sm:w-auto">
-        <IconField className="w-full sm:w-20rem">
+        <IconField iconPosition="left" className="w-full sm:w-20rem">
           <InputIcon className="pi pi-search" />
           <InputText
             type="search"

@@ -10,54 +10,26 @@
     padding: var(--input-padding-y) var(--input-padding-x) !important;
 }
 
-/* IconField Alignment */
+/* Official PrimeReact IconField Support */
 .p-icon-field {
-  width: 100%;
-  display: block; /* Estabiliza el contexto de posicionamiento absoluto */
-  position: relative;
+    width: 100%;
 }
 
-.p-icon-field-left > .p-input-icon {
-  position: absolute;
-  left: 0.75rem;
-  top: 0 !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: #64748b;
-  font-size: 1rem;
-  z-index: 5;
-  pointer-events: none;
-  margin: 0 !important;
-  padding: 0 !important;
-  transform: none !important; /* Elimina cualquier transform que cause desalineación */
+.p-icon-field .p-input-icon {
+    color: #64748b;
+    font-size: 0.9rem;
 }
 
+/* Ensure padding matches our variables */
 .p-icon-field-left > .p-inputtext,
-.p-icon-field-left > .p-inputtextarea {
-  padding-left: var(--input-icon-padding-left) !important;
-}
-
-/* Fix específico para el input de búsqueda que PrimeReact a veces maneja con clases adicionales */
-.p-icon-field-left > input[type="search"] {
-    padding-left: var(--input-icon-padding-left) !important;
-}
-
-/* Dropdown inside IconField - THE FIX */
+.p-icon-field-left > .p-inputtextarea,
 .p-icon-field-left > .p-dropdown {
-    padding: 0 !important;
-    display: inline-flex !important;
-    align-items: center !important;
+    padding-left: var(--input-icon-padding-left) !important;
 }
 
+/* Dropdown specific reset for official IconField */
 .p-icon-field-left > .p-dropdown .p-dropdown-label {
-    padding: var(--input-padding-y) var(--input-padding-x) !important;
-    padding-left: var(--input-icon-padding-left) !important;
-    display: flex;
-    align-items: center;
-    line-height: 1.2;
-    background: transparent !important;
+    padding-left: 0 !important;
 }
 
 /* Remove default focus ring shadows for ultra-clean look */
@@ -70,16 +42,6 @@
 .p-dropdown .p-dropdown-trigger {
     width: 2.5rem;
     color: #9ca3af;
-}
-
-.p-icon-field > .p-dropdown {
-    display: inline-flex !important;
-}
-
-/* Remove default PrimeReact Focus Ring for a cleaner look */
-.p-inputtext:focus, .p-dropdown.p-focus {
-    box-shadow: none !important;
-    border-color: var(--primary-color) !important;
 }
 
 .field label {
