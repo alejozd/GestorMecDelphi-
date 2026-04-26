@@ -1,0 +1,44 @@
+.p-inputtext, .p-dropdown, .p-inputtextarea {
+  padding: var(--input-padding-y) var(--input-padding-x) !important;
+  border-radius: var(--border-radius-lg) !important;
+  font-size: 0.9rem !important;
+  width: 100%;
+}
+
+/* IconField Alignment */
+.p-icon-field {
+  width: 100%;
+  display: block;
+}
+
+.p-icon-field-left > .p-input-icon {
+  left: 0.75rem !important;
+  z-index: 1;
+}
+
+.p-icon-field-left > .p-inputtext,
+.p-icon-field-left > .p-dropdown,
+.p-icon-field-left > .p-inputtextarea {
+  padding-left: var(--input-icon-padding-left) !important;
+}
+
+/* Dropdown specific polish to remove double border look */
+.p-dropdown .p-dropdown-label {
+    padding-left: 0 !important;
+}
+
+.p-icon-field > .p-dropdown {
+    display: inline-flex !important;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.field {
+    margin-bottom: 1.25rem !important;
+}

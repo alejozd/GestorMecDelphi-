@@ -1,0 +1,14 @@
+.custom-datatable .p-datatable-thead > tr > th {
+  background-color: var(--surface-50);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.custom-datatable .p-datatable-tbody > tr:hover {
+  background-color: var(--blue-50) !important;
+}
+
+.cliente-detail-container .info-list i {
+    color: var(--primary-color);
+}

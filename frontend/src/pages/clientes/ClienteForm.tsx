@@ -191,13 +191,13 @@ const ClienteForm: React.FC = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="p-fluid grid px-3">
 
             <div className="field col-12 md:col-6">
-              <label htmlFor="cod_tipdo" className="font-bold text-700 mb-2 block">Tipo de Documento <span className="text-red-500">*</span></label>
+              <label htmlFor="cod_tipdo">Tipo de Documento <span className="text-red-500">*</span></label>
               <Controller
                 name="cod_tipdo"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-id-card text-blue-500" />
+                    <InputIcon className="pi pi-id-card" />
                     <Dropdown
                       id={field.name}
                       value={field.value}
@@ -206,52 +206,52 @@ const ClienteForm: React.FC = () => {
                       optionLabel="td_nombre"
                       optionValue="td_codi"
                       placeholder="Seleccione tipo"
-                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cod_tipdo })}
+                      className={classNames({ 'p-invalid': errors.cod_tipdo })}
                     />
                   </IconField>
                 )}
               />
-              {errors.cod_tipdo && <small className="p-error ml-1 mt-1 block">{errors.cod_tipdo.message}</small>}
+              {errors.cod_tipdo && <small className="p-error ml-1">{errors.cod_tipdo.message}</small>}
             </div>
 
             <div className="field col-12 md:col-6">
-              <label htmlFor="cli_numdoc" className="font-bold text-700 mb-2 block">Número de Documento <span className="text-red-500">*</span></label>
+              <label htmlFor="cli_numdoc">Número de Documento <span className="text-red-500">*</span></label>
               <Controller
                 name="cli_numdoc"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-hashtag text-blue-500" />
+                    <InputIcon className="pi pi-hashtag" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_numdoc })}
+                      className={classNames({ 'p-invalid': errors.cli_numdoc })}
                       placeholder="Ej: 1020304050"
                     />
                   </IconField>
                 )}
               />
-              {errors.cli_numdoc && <small className="p-error ml-1 mt-1 block">{errors.cli_numdoc.message}</small>}
+              {errors.cli_numdoc && <small className="p-error ml-1">{errors.cli_numdoc.message}</small>}
             </div>
 
             <div className="field col-12">
-              <label htmlFor="cli_nombre" className="font-bold text-700 mb-2 block">Nombre Completo <span className="text-red-500">*</span></label>
+              <label htmlFor="cli_nombre">Nombre Completo <span className="text-red-500">*</span></label>
               <Controller
                 name="cli_nombre"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-user text-blue-500" />
+                    <InputIcon className="pi pi-user" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_nombre })}
+                      className={classNames({ 'p-invalid': errors.cli_nombre })}
                       placeholder="Ej: Juan Pérez"
                     />
                   </IconField>
                 )}
               />
-              {errors.cli_nombre && <small className="p-error ml-1 mt-1 block">{errors.cli_nombre.message}</small>}
+              {errors.cli_nombre && <small className="p-error ml-1">{errors.cli_nombre.message}</small>}
             </div>
 
             <div className="col-12">
@@ -263,43 +263,43 @@ const ClienteForm: React.FC = () => {
             </div>
 
             <div className="field col-12 md:col-6">
-              <label htmlFor="cli_tel_movil" className="font-bold text-700 mb-2 block">Teléfono Móvil <span className="text-red-500">*</span></label>
+              <label htmlFor="cli_tel_movil">Teléfono Móvil <span className="text-red-500">*</span></label>
               <Controller
                 name="cli_tel_movil"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-mobile text-blue-500" />
+                    <InputIcon className="pi pi-mobile" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_tel_movil })}
+                      className={classNames({ 'p-invalid': errors.cli_tel_movil })}
                       placeholder="10 dígitos"
                     />
                   </IconField>
                 )}
               />
-              {errors.cli_tel_movil && <small className="p-error ml-1 mt-1 block">{errors.cli_tel_movil.message}</small>}
+              {errors.cli_tel_movil && <small className="p-error ml-1">{errors.cli_tel_movil.message}</small>}
             </div>
 
             <div className="field col-12 md:col-6">
-              <label htmlFor="cli_correoe" className="font-bold text-700 mb-2 block">Correo Electrónico</label>
+              <label htmlFor="cli_correoe">Correo Electrónico</label>
               <Controller
                 name="cli_correoe"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-envelope text-blue-500" />
+                    <InputIcon className="pi pi-envelope" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.cli_correoe })}
+                      className={classNames({ 'p-invalid': errors.cli_correoe })}
                       placeholder="ejemplo@correo.com"
                     />
                   </IconField>
                 )}
               />
-              {errors.cli_correoe && <small className="p-error ml-1 mt-1 block">{errors.cli_correoe.message}</small>}
+              {errors.cli_correoe && <small className="p-error ml-1">{errors.cli_correoe.message}</small>}
             </div>
 
             <div className="col-12">
@@ -311,13 +311,13 @@ const ClienteForm: React.FC = () => {
             </div>
 
             <div className="field col-12 md:col-6">
-              <label htmlFor="ciu_codi" className="font-bold text-700 mb-2 block">Ciudad <span className="text-red-500">*</span></label>
+              <label htmlFor="ciu_codi">Ciudad <span className="text-red-500">*</span></label>
               <Controller
                 name="ciu_codi"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-map text-blue-500" />
+                    <InputIcon className="pi pi-map" />
                     <Dropdown
                       id={field.name}
                       value={field.value}
@@ -327,26 +327,25 @@ const ClienteForm: React.FC = () => {
                       optionValue="ciu_codi"
                       filter
                       placeholder="Seleccione ciudad"
-                      className={classNames('w-full border-round-xl', { 'p-invalid': errors.ciu_codi })}
+                      className={classNames({ 'p-invalid': errors.ciu_codi })}
                     />
                   </IconField>
                 )}
               />
-              {errors.ciu_codi && <small className="p-error ml-1 mt-1 block">{errors.ciu_codi.message}</small>}
+              {errors.ciu_codi && <small className="p-error ml-1">{errors.ciu_codi.message}</small>}
             </div>
 
             <div className="field col-12 md:col-6">
-              <label htmlFor="cli_direccion" className="font-bold text-700 mb-2 block">Dirección</label>
+              <label htmlFor="cli_direccion">Dirección</label>
               <Controller
                 name="cli_direccion"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-directions text-blue-500" />
+                    <InputIcon className="pi pi-directions" />
                     <InputText
                       id={field.name}
                       {...field}
-                      className="w-full border-round-xl"
                       placeholder="Calle/Carrera #..."
                     />
                   </IconField>
@@ -355,19 +354,18 @@ const ClienteForm: React.FC = () => {
             </div>
 
             <div className="field col-12">
-              <label htmlFor="cli_observacion" className="font-bold text-700 mb-2 block">Observaciones Adicionales</label>
+              <label htmlFor="cli_observacion">Observaciones Adicionales</label>
               <Controller
                 name="cli_observacion"
                 control={control}
                 render={({ field }) => (
                   <IconField>
-                    <InputIcon className="pi pi-comment text-blue-500" />
+                    <InputIcon className="pi pi-comment" />
                     <InputTextarea
                       id={field.name}
                       {...field}
                       rows={3}
                       autoResize
-                      className="w-full border-round-xl"
                       placeholder="Detalles sobre preferencias del cliente, convenios, etc."
                     />
                   </IconField>
