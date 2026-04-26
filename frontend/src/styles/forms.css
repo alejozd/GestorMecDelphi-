@@ -1,8 +1,9 @@
 .p-inputtext, .p-dropdown, .p-inputtextarea {
   padding: var(--input-padding-y) var(--input-padding-x) !important;
   border-radius: var(--border-radius-lg) !important;
-  font-size: 0.9rem !important;
+  font-size: var(--input-font-size) !important;
   width: 100%;
+  border: 1px solid #d1d5db !important; /* Más limpio, borde más claro */
 }
 
 /* IconField Alignment */
@@ -22,13 +23,26 @@
   padding-left: var(--input-icon-padding-left) !important;
 }
 
-/* Dropdown specific polish to remove double border look */
+/* Dropdown specific polish to remove double border look and make it cleaner */
 .p-dropdown .p-dropdown-label {
-    padding-left: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.p-dropdown .p-dropdown-trigger {
+    width: 2.5rem;
+    color: #9ca3af;
 }
 
 .p-icon-field > .p-dropdown {
     display: inline-flex !important;
+}
+
+/* Remove default PrimeReact Focus Ring for a cleaner look */
+.p-inputtext:focus, .p-dropdown.p-focus {
+    box-shadow: none !important;
+    border-color: var(--primary-color) !important;
 }
 
 .field label {
