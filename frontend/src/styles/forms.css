@@ -13,24 +13,23 @@
 /* IconField Alignment */
 .p-icon-field {
   width: 100%;
-  display: flex;
-  align-items: center;
+  display: block; /* Estabiliza el contexto de posicionamiento absoluto */
   position: relative;
 }
 
 .p-icon-field-left > .p-input-icon {
   position: absolute;
   left: 0.85rem;
-  top: 50%;
-  transform: translateY(-50%); /* Centrado vertical automático perfecto */
-  color: #6b7280;
-  font-size: 1rem; /* Aumentado ligeramente para mejor visibilidad */
-  z-index: 2;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #64748b;
+  font-size: 1rem;
+  z-index: 5;
   pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  line-height: 1 !important;
 }
 
 .p-icon-field-left > .p-inputtext,
@@ -40,7 +39,9 @@
 
 /* Dropdown inside IconField - THE FIX */
 .p-icon-field-left > .p-dropdown {
-    padding: 0 !important; /* Remove padding from container */
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
 }
 
 .p-icon-field-left > .p-dropdown .p-dropdown-label {
@@ -48,7 +49,8 @@
     padding-left: var(--input-icon-padding-left) !important;
     display: flex;
     align-items: center;
-    min-height: calc(var(--input-font-size) + (var(--input-padding-y) * 2));
+    line-height: 1.2;
+    background: transparent !important;
 }
 
 /* Remove default focus ring shadows for ultra-clean look */
