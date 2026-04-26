@@ -1,31 +1,46 @@
 .p-inputtext, .p-dropdown, .p-inputtextarea {
-  padding: var(--input-padding-y) var(--input-padding-x) !important;
   border-radius: var(--border-radius-lg) !important;
   font-size: var(--input-font-size) !important;
   width: 100%;
-  border: 1px solid #d1d5db !important; /* Más limpio, borde más claro */
+  border: 1px solid #d1d5db !important;
+  transition: border-color 0.2s;
+}
+
+.p-inputtext, .p-inputtextarea {
+    padding: var(--input-padding-y) var(--input-padding-x) !important;
 }
 
 /* IconField Alignment */
 .p-icon-field {
   width: 100%;
-  display: block;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .p-icon-field-left > .p-input-icon {
-  left: 0.75rem !important;
-  z-index: 1;
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 0.9rem;
+  z-index: 2;
 }
 
 .p-icon-field-left > .p-inputtext,
-.p-icon-field-left > .p-dropdown,
 .p-icon-field-left > .p-inputtextarea {
   padding-left: var(--input-icon-padding-left) !important;
 }
 
-/* Dropdown specific polish to remove double border look and make it cleaner */
-.p-dropdown .p-dropdown-label {
-    padding: 0 !important;
+/* Dropdown inside IconField - THE FIX */
+.p-icon-field-left > .p-dropdown {
+    padding: 0 !important; /* Remove padding from container */
+}
+
+.p-icon-field-left > .p-dropdown .p-dropdown-label {
+    padding: var(--input-padding-y) var(--input-padding-x) !important;
+    padding-left: var(--input-icon-padding-left) !important; /* Apply icon padding to label instead */
     display: flex;
     align-items: center;
 }
