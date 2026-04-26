@@ -28,13 +28,20 @@
   pointer-events: none;
   margin: 0 !important;
   padding: 0 !important;
-  display: block !important;
+  display: flex !important; /* Cambiado a flex para mejor control de centrado interno del glifo */
+  align-items: center !important;
+  justify-content: center !important;
   line-height: 1 !important;
 }
 
 .p-icon-field-left > .p-inputtext,
 .p-icon-field-left > .p-inputtextarea {
   padding-left: var(--input-icon-padding-left) !important;
+}
+
+/* Fix específico para el input de búsqueda que PrimeReact a veces maneja con clases adicionales */
+.p-icon-field-left > input[type="search"] {
+    padding-left: var(--input-icon-padding-left) !important;
 }
 
 /* Dropdown inside IconField - THE FIX */
