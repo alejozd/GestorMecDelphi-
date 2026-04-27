@@ -3,6 +3,8 @@ import authRoutes from './auth.routes.js';
 import clientesRoutes from './clientes.routes.js';
 import ordenesRoutes from './ordenes.routes.js';
 import catalogosRoutes from './catalogos.routes.js';
+import vehiculosRoutes from './vehiculos.routes.js';
+import productosRoutes from './productos.routes.js';
 
 const router = Router();
 
@@ -27,5 +29,7 @@ router.use('/auth', authRoutes);
 router.use('/clientes', clientesRoutes);
 router.use('/ordenes', ordenesRoutes);
 router.use('/catalogos', catalogosRoutes);
+router.use('/vehiculos', vehiculosRoutes);
+router.use('/productos', productosRoutes);
 
 export default router;

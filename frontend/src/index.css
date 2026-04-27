@@ -5,6 +5,7 @@
 @import './styles/components.css';
 @import './styles/pages/dashboard.css';
 @import './styles/pages/clientes.css';
+@import './styles/pages/vehiculos.css';
 
 /* Global scrollbars */
 ::-webkit-scrollbar { width: 8px; }

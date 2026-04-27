@@ -7,6 +7,14 @@ import Dashboard from './pages/Dashboard';
 import ClienteList from './pages/clientes/ClienteList';
 import ClienteForm from './pages/clientes/ClienteForm';
 import ClienteDetail from './pages/clientes/ClienteDetail';
+import VehiculoList from './pages/vehiculos/VehiculoList';
+import VehiculoForm from './pages/vehiculos/VehiculoForm';
+import VehiculoDetail from './pages/vehiculos/VehiculoDetail';
+import ProductoList from './pages/productos/ProductoList';
+import ProductoForm from './pages/productos/ProductoForm';
+import OrdenList from './pages/ordenes/OrdenList';
+import OrdenForm from './pages/ordenes/OrdenForm';
+import OrdenDetail from './pages/ordenes/OrdenDetail';
 
 // Placeholders para páginas pendientes de implementar
 import Layout from './components/Layout';
@@ -81,7 +89,31 @@ export const router = createBrowserRouter([
     path: '/vehiculos',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Vehículos por Cliente" />
+        <VehiculoList />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vehiculos/nuevo',
+    element: (
+      <ProtectedRoute>
+        <VehiculoForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vehiculos/editar/:id',
+    element: (
+      <ProtectedRoute>
+        <VehiculoForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vehiculos/:id',
+    element: (
+      <ProtectedRoute>
+        <VehiculoDetail />
       </ProtectedRoute>
     ),
   },
@@ -90,7 +122,7 @@ export const router = createBrowserRouter([
     path: '/productos',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Listado de Productos" />
+        <ProductoList />
       </ProtectedRoute>
     ),
   },
@@ -98,7 +130,7 @@ export const router = createBrowserRouter([
     path: '/productos/nuevo',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Nuevo Producto" />
+        <ProductoForm />
       </ProtectedRoute>
     ),
   },
@@ -106,7 +138,7 @@ export const router = createBrowserRouter([
     path: '/productos/editar/:id',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Editar Producto" />
+        <ProductoForm />
       </ProtectedRoute>
     ),
   },
@@ -123,7 +155,7 @@ export const router = createBrowserRouter([
     path: '/ordenes',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Consultar Órdenes" />
+        <OrdenList />
       </ProtectedRoute>
     ),
   },
@@ -131,7 +163,7 @@ export const router = createBrowserRouter([
     path: '/ordenes/nueva',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Nueva Orden de Trabajo" />
+        <OrdenForm />
       </ProtectedRoute>
     ),
   },
@@ -139,7 +171,7 @@ export const router = createBrowserRouter([
     path: '/ordenes/:id',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Detalle de Orden" />
+        <OrdenDetail />
       </ProtectedRoute>
     ),
   },

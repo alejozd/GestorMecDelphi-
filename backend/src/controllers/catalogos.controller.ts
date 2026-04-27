@@ -42,6 +42,40 @@ export class CatalogosController {
       });
     }
   }
+
+  async getMarcas(_req: Request, res: Response<ApiResponse>) {
+    try {
+      const marcas = await prisma.marcaVehiculo.findMany({
+        orderBy: { mr_nombre: 'asc' }
+      });
+      res.json({ success: true, data: marcas, message: 'Marcas obtenidas' });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Error' });
+    }
+  }
+
+  async getLineas(req: Request, res: Response<ApiResponse>) {
+    try {
+      const { mr_codi } = req.query;
+      const where = mr_codi ? { mr_codi: parseInt(mr_codi as string) } : {};
+      const lineas = await prisma.lineaVehiculo.findMany({
+        where,
+        orderBy: { li_nombre: 'asc' }
+      });
+      res.json({ success: true, data: lineas, message: 'Líneas obtenidas' });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Error' });
+    }
+  }
+
+  async getGrupos(_req: Request, res: Response<ApiResponse>) {
+    try {
+      const grupos = await prisma.grupoInventario.findMany({ orderBy: { gru_nombre: 'asc' } });
+      res.json({ success: true, message: 'Grupos obtenidos', data: grupos });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Error' });
+    }
+  }
 }
 
 export const catalogosController = new CatalogosController();

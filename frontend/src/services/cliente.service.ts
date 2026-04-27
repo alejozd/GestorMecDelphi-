@@ -42,6 +42,7 @@ export interface ClienteUpdate extends Partial<ClienteCreate> {
 export interface FiltroCliente {
   page?: number;
   limit?: number;
+  limite?: number; // Compatibilidad temporal
   search?: string;
   cod_tipdo?: number;
   ciu_codi?: number;

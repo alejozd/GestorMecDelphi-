@@ -6,5 +6,8 @@ const router = Router();
 
 router.get('/tipos-documento', verifyToken, (req, res) => catalogosController.getTiposDocumento(req, res));
 router.get('/ciudades', verifyToken, (req, res) => catalogosController.getCiudades(req, res));
+router.get('/marcas', catalogosController.getMarcas);
+router.get('/lineas', catalogosController.getLineas);
+router.get('/grupos', catalogosController.getGrupos);
 
 export default router;

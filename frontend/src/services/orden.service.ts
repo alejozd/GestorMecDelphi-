@@ -87,10 +87,13 @@ export interface OrdenTrabajoUpdate extends Partial<OrdenTrabajoCreate> {
 
 export interface FiltroOrden {
   pagina?: number;
+  page?: number;
   limite?: number;
+  limit?: number;
   otm_nume?: number;
   cli_codi?: number;
   placa?: string;
+  search?: string;
   otm_estado?: number;
   otm_clase_doc?: number;
   fechaDesde?: string;
@@ -124,8 +127,9 @@ class OrdenTrabajoService {
   async getOrdenes(filtros?: FiltroOrden): Promise<OrdenesResponse> {
     const params = new URLSearchParams();
     
-    if (filtros?.pagina) params.append('pagina', String(filtros.pagina));
-    if (filtros?.limite) params.append('limite', String(filtros.limite));
+    if (filtros?.pagina || filtros?.page) params.append('page', String(filtros?.pagina || filtros?.page));
+    if (filtros?.limite || filtros?.limit) params.append('limit', String(filtros?.limite || filtros?.limit));
+    if (filtros?.search) params.append('search', filtros.search);
     if (filtros?.otm_nume) params.append('otm_nume', String(filtros.otm_nume));
     if (filtros?.cli_codi) params.append('cli_codi', String(filtros.cli_codi));
     if (filtros?.placa) params.append('placa', filtros.placa);
