@@ -1,4 +1,5 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
+import { PaginatedData } from './cliente.service';
 
 // Interfaces
 export interface StockBodega {
@@ -33,19 +34,14 @@ export interface FiltroStock {
   limite?: number;
 }
 
-export interface StockResponse {
-  data: StockBodega[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
-  resumen?: {
-    totalProductos: number;
-    valorTotalInventario: number;
-    productosStockBajo: number;
-    productosSinStock: number;
-  };
+export interface StockResumen {
+  totalProductos: number;
+  valorTotalInventario: number;
+  productosStockBajo: number;
+  productosSinStock: number;
 }
+
+export type StockResponse = ApiResponse<PaginatedData<StockBodega> & { resumen?: StockResumen }>;
 
 export interface MovimientoStock {
   mvi_codi: number;
@@ -77,13 +73,7 @@ export interface FiltroMovimientos {
   limite?: number;
 }
 
-export interface MovimientosResponse {
-  data: MovimientoStock[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
-}
+export type MovimientosResponse = ApiResponse<PaginatedData<MovimientoStock>>;
 
 class StockService {
   private endpoint = '/stock';
@@ -108,31 +98,31 @@ class StockService {
   /**
    * Obtener stock de un producto en todas las bodegas
    */
-  async getStockPorProducto(proCodi: number): Promise<StockBodega[]> {
-    return apiService.get<StockBodega[]>(`${this.endpoint}/producto/${proCodi}`);
+  async getStockPorProducto(proCodi: number): Promise<ApiResponse<StockBodega[]>> {
+    return apiService.get<ApiResponse<StockBodega[]>>(`${this.endpoint}/producto/${proCodi}`);
   }
 
   /**
    * Obtener stock de una bodega específica
    */
-  async getStockPorBodega(bodCodi: number): Promise<StockBodega[]> {
-    return apiService.get<StockBodega[]>(`${this.endpoint}/bodega/${bodCodi}`);
+  async getStockPorBodega(bodCodi: number): Promise<ApiResponse<StockBodega[]>> {
+    return apiService.get<ApiResponse<StockBodega[]>>(`${this.endpoint}/bodega/${bodCodi}`);
   }
 
   /**
    * Obtener productos con stock bajo
    */
-  async getStockBajo(bodCodi?: number): Promise<StockBodega[]> {
+  async getStockBajo(bodCodi?: number): Promise<ApiResponse<StockBodega[]>> {
     const params = bodCodi ? `?bod_codi=${bodCodi}` : '';
-    return apiService.get<StockBodega[]>(`${this.endpoint}/stock-bajo${params}`);
+    return apiService.get<ApiResponse<StockBodega[]>>(`${this.endpoint}/stock-bajo${params}`);
   }
 
   /**
    * Obtener productos sin stock
    */
-  async getSinStock(bodCodi?: number): Promise<StockBodega[]> {
+  async getSinStock(bodCodi?: number): Promise<ApiResponse<StockBodega[]>> {
     const params = bodCodi ? `?bod_codi=${bodCodi}` : '';
-    return apiService.get<StockBodega[]>(`${this.endpoint}/sin-stock${params}`);
+    return apiService.get<ApiResponse<StockBodega[]>>(`${this.endpoint}/sin-stock${params}`);
   }
 
   /**
@@ -155,12 +145,12 @@ class StockService {
   /**
    * Obtener movimientos de un producto específico
    */
-  async getMovimientosPorProducto(proCodi: number, fechaDesde?: string, fechaHasta?: string): Promise<MovimientoStock[]> {
+  async getMovimientosPorProducto(proCodi: number, fechaDesde?: string, fechaHasta?: string): Promise<ApiResponse<MovimientoStock[]>> {
     const params = new URLSearchParams();
     if (fechaDesde) params.append('fechaDesde', fechaDesde);
     if (fechaHasta) params.append('fechaHasta', fechaHasta);
     
-    return apiService.get<MovimientoStock[]>(
+    return apiService.get<ApiResponse<MovimientoStock[]>>(
       `${this.endpoint}/producto/${proCodi}/movimientos?${params.toString()}`
     );
   }
@@ -174,8 +164,8 @@ class StockService {
     cantidad: number; // Positivo=entrada, Negativo=salida
     observacion: string;
     documentoOrigen?: string;
-  }): Promise<StockBodega> {
-    return apiService.post<StockBodega>(`${this.endpoint}/ajuste`, data);
+  }): Promise<ApiResponse<StockBodega>> {
+    return apiService.post<ApiResponse<StockBodega>>(`${this.endpoint}/ajuste`, data);
   }
 
   /**
@@ -208,13 +198,17 @@ class StockService {
   /**
    * Obtener valor total del inventario
    */
-  async getValorInventario(bodCodi?: number): Promise<{
+  async getValorInventario(bodCodi?: number): Promise<ApiResponse<{
     valorTotal: number;
     totalProductos: number;
     fechaCorte: string;
-  }> {
+  }>> {
     const params = bodCodi ? `?bod_codi=${bodCodi}` : '';
-    return apiService.get(`${this.endpoint}/valor-inventario${params}`);
+    return apiService.get<ApiResponse<{
+      valorTotal: number;
+      totalProductos: number;
+      fechaCorte: string;
+    }>>(`${this.endpoint}/valor-inventario${params}`);
   }
 }
 

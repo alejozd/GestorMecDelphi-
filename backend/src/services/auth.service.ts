@@ -61,7 +61,7 @@ export class AuthService {
     };
 
     const token = jwt.sign(tokenPayload, configApp.jwtSecret, {
-      expiresIn: configApp.jwtExpiresIn,
+      expiresIn: configApp.jwtExpiresIn as any,
     });
 
     return { token, usuario: tokenPayload };

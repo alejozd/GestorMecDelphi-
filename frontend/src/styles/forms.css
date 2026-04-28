@@ -1,0 +1,57 @@
+.p-inputtext, .p-dropdown, .p-inputtextarea {
+  border-radius: var(--border-radius-lg) !important;
+  font-size: var(--input-font-size) !important;
+  width: 100%;
+  border: 1px solid #d1d5db !important;
+  transition: border-color 0.2s;
+}
+
+.p-inputtext, .p-inputtextarea {
+    padding: var(--input-padding-y) var(--input-padding-x) !important;
+}
+
+/* Official PrimeReact IconField Support */
+.p-icon-field {
+    width: 100%;
+}
+
+.p-icon-field .p-input-icon {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Ensure padding matches our variables */
+.p-icon-field-left > .p-inputtext,
+.p-icon-field-left > .p-inputtextarea,
+.p-icon-field-left > .p-dropdown {
+    padding-left: var(--input-icon-padding-left) !important;
+}
+
+/* Dropdown specific reset for official IconField */
+.p-icon-field-left > .p-dropdown .p-dropdown-label {
+    padding-left: 0 !important;
+}
+
+/* Remove default focus ring shadows for ultra-clean look */
+.p-inputtext:focus, .p-dropdown.p-focus, .p-inputtextarea:focus {
+    box-shadow: 0 0 0 1px var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    outline: none;
+}
+
+.p-dropdown .p-dropdown-trigger {
+    width: 2.5rem;
+    color: #9ca3af;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.field {
+    margin-bottom: 1.25rem !important;
+}

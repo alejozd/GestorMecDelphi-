@@ -1,22 +1,37 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { PublicRoute, ProtectedRoute } from './components/ProtectedRoute';
 
 // Páginas
 import Login from './pages/auth/Login';
 import Dashboard from './pages/Dashboard';
+import ClienteList from './pages/clientes/ClienteList';
+import ClienteForm from './pages/clientes/ClienteForm';
+import ClienteDetail from './pages/clientes/ClienteDetail';
+import VehiculoList from './pages/vehiculos/VehiculoList';
+import VehiculoForm from './pages/vehiculos/VehiculoForm';
+import VehiculoDetail from './pages/vehiculos/VehiculoDetail';
+import ProductoList from './pages/productos/ProductoList';
+import ProductoForm from './pages/productos/ProductoForm';
+import OrdenList from './pages/ordenes/OrdenList';
+import OrdenForm from './pages/ordenes/OrdenForm';
+import OrdenDetail from './pages/ordenes/OrdenDetail';
 
 // Placeholders para páginas pendientes de implementar
+import Layout from './components/Layout';
+
 const PlaceholderPage = ({ title }: { title: string }) => (
-  <div className="card">
-    <h2 className="text-2xl font-bold mb-3">{title}</h2>
-    <p className="text-secondary">
-      Página en desarrollo - Implementar según Manual.docx
-    </p>
-    <div className="flex gap-2 mt-4">
-      <i className="pi pi-info-circle"></i>
-      <span>Esta página corresponde a una ventana del sistema legacy. Revisar documentación para campos y validaciones específicas.</span>
+  <Layout>
+    <div className="card">
+      <h2 className="text-2xl font-bold mb-3">{title}</h2>
+      <p className="text-secondary">
+        Página en desarrollo - Implementar según Manual.docx
+      </p>
+      <div className="flex gap-2 mt-4">
+        <i className="pi pi-info-circle"></i>
+        <span>Esta página corresponde a una ventana del sistema legacy. Revisar documentación para campos y validaciones específicas.</span>
+      </div>
     </div>
-  </div>
+  </Layout>
 );
 
 export const router = createBrowserRouter([
@@ -41,7 +56,7 @@ export const router = createBrowserRouter([
     path: '/clientes',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Listado de Clientes" />
+        <ClienteList />
       </ProtectedRoute>
     ),
   },
@@ -49,7 +64,7 @@ export const router = createBrowserRouter([
     path: '/clientes/nuevo',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Nuevo Cliente" />
+        <ClienteForm />
       </ProtectedRoute>
     ),
   },
@@ -57,7 +72,15 @@ export const router = createBrowserRouter([
     path: '/clientes/editar/:id',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Editar Cliente" />
+        <ClienteForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/clientes/:id',
+    element: (
+      <ProtectedRoute>
+        <ClienteDetail />
       </ProtectedRoute>
     ),
   },
@@ -66,7 +89,31 @@ export const router = createBrowserRouter([
     path: '/vehiculos',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Vehículos por Cliente" />
+        <VehiculoList />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vehiculos/nuevo',
+    element: (
+      <ProtectedRoute>
+        <VehiculoForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vehiculos/editar/:id',
+    element: (
+      <ProtectedRoute>
+        <VehiculoForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vehiculos/:id',
+    element: (
+      <ProtectedRoute>
+        <VehiculoDetail />
       </ProtectedRoute>
     ),
   },
@@ -75,7 +122,7 @@ export const router = createBrowserRouter([
     path: '/productos',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Listado de Productos" />
+        <ProductoList />
       </ProtectedRoute>
     ),
   },
@@ -83,7 +130,7 @@ export const router = createBrowserRouter([
     path: '/productos/nuevo',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Nuevo Producto" />
+        <ProductoForm />
       </ProtectedRoute>
     ),
   },
@@ -91,7 +138,7 @@ export const router = createBrowserRouter([
     path: '/productos/editar/:id',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Editar Producto" />
+        <ProductoForm />
       </ProtectedRoute>
     ),
   },
@@ -108,7 +155,7 @@ export const router = createBrowserRouter([
     path: '/ordenes',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Consultar Órdenes" />
+        <OrdenList />
       </ProtectedRoute>
     ),
   },
@@ -116,7 +163,7 @@ export const router = createBrowserRouter([
     path: '/ordenes/nueva',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Nueva Orden de Trabajo" />
+        <OrdenForm />
       </ProtectedRoute>
     ),
   },
@@ -124,7 +171,7 @@ export const router = createBrowserRouter([
     path: '/ordenes/:id',
     element: (
       <ProtectedRoute>
-        <PlaceholderPage title="Detalle de Orden" />
+        <OrdenDetail />
       </ProtectedRoute>
     ),
   },
@@ -217,10 +264,22 @@ export const router = createBrowserRouter([
     path: '*',
     element: <Navigate to="/login" replace />,
   },
-]);
+], {
+  future: {
+    v7_relativeSplatPath: true,
+    v7_startTransition: true,
+  },
+} as any);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider
+      router={router}
+      future={{
+        v7_startTransition: true,
+      }}
+    />
+  );
 }
 
 export default App;

@@ -1,0 +1,38 @@
+.kpi-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 3px solid;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15);
+}
+
+.quick-access-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-access-btn:hover {
+  background: var(--surface-ground);
+  border-color: var(--primary-color);
+  transform: translateX(4px);
+}
+
+.quick-access-btn .icon-wrapper {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  background: var(--surface-ground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}

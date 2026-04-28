@@ -1,0 +1,25 @@
+/* Menubar */
+.p-menubar {
+  border: none;
+  background: var(--surface-card);
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+}
+
+.p-menubar .p-menuitem-icon {
+  margin-right: 0.75rem;
+}
+
+/* DataTable */
+.p-datatable .p-datatable-header {
+  background: #f9fafb;
+  padding: 1rem 1.5rem;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.75rem 1rem !important;
+}
+
+/* Custom categories */
+.nav-dashboard .p-menuitem-icon { color: #3b82f6; }
+.nav-clientes .p-menuitem-icon { color: #8b5cf6; }

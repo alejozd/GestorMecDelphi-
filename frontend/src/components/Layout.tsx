@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
 import { useAuth } from '../context/AuthContext';
 
@@ -11,6 +10,7 @@ interface MenuItem {
   icon?: string;
   command?: () => void;
   items?: MenuItem[];
+  className?: string;
 }
 
 interface LayoutProps {
@@ -19,20 +19,22 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
-  const { usuario, logout, hasPermission } = useAuth();
+  const { usuario, logout } = useAuth();
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   useEffect(() => {
     // Construir menú basado en permisos (placeholder - implementar según backend)
     const items: MenuItem[] = [
       {
-        label: 'Inicio',
+        label: 'Dashboard',
         icon: 'pi pi-home',
+        className: 'nav-dashboard',
         command: () => navigate('/'),
       },
       {
         label: 'Clientes',
         icon: 'pi pi-users',
+        className: 'nav-clientes',
         items: [
           {
             label: 'Listado de Clientes',
@@ -54,6 +56,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Inventario',
         icon: 'pi pi-box',
+        className: 'nav-inventario',
         items: [
           {
             label: 'Productos',
@@ -75,6 +78,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Órdenes',
         icon: 'pi pi-file-edit',
+        className: 'nav-ordenes',
         items: [
           {
             label: 'Nueva Orden',
@@ -91,6 +95,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Documentos',
         icon: 'pi pi-file',
+        className: 'nav-documentos',
         items: [
           {
             label: 'Facturas',
@@ -107,11 +112,13 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Historial',
         icon: 'pi pi-history',
+        className: 'nav-historial',
         command: () => navigate('/historial'),
       },
       {
         label: 'Stock',
         icon: 'pi pi-chart-bar',
+        className: 'nav-stock',
         items: [
           {
             label: 'Consulta de Stock',
@@ -133,6 +140,7 @@ export default function Layout({ children }: LayoutProps) {
       {
         label: 'Reportes',
         icon: 'pi pi-chart-line',
+        className: 'nav-reportes',
         items: [
           {
             label: 'Ventas por Período',
@@ -151,39 +159,63 @@ export default function Layout({ children }: LayoutProps) {
     setMenuItems(items);
   }, [navigate]);
 
-  const end = (
-    <div className="flex align-items-center gap-3">
-      <div className="flex flex-column align-items-end">
-        <span className="text-sm font-medium">{usuario?.nombre}</span>
-        <small className="text-secondary text-xs">{usuario?.usuario}</small>
+  const start = (
+    <div className="flex align-items-center mr-4">
+      <div className="bg-primary border-round p-1 mr-2 flex align-items-center justify-content-center" style={{ width: '35px', height: '35px' }}>
+        <i className="pi pi-wrench text-white text-xl"></i>
       </div>
-      <Avatar 
-        icon="pi pi-user" 
-        shape="circle" 
-        size="large"
-        className="bg-primary text-white"
-      />
+      <span className="text-xl font-bold text-primary hidden md:block">
+        Serviteca<span className="text-amber-600">Pro</span>
+      </span>
+    </div>
+  );
+
+  const end = (
+    <div className="flex align-items-center gap-1 sm:gap-3">
+      <div className="flex align-items-center">
+        <div className="flex flex-column align-items-end mr-2 hidden sm:flex">
+          <span className="text-sm font-bold text-900 line-height-1 mb-1">{usuario?.nombre}</span>
+          <span className="text-xs text-600 line-height-1">@{usuario?.usuario}</span>
+        </div>
+        <Avatar
+          icon="pi pi-user"
+          shape="circle"
+          className="bg-blue-50 text-blue-600 border-1 border-blue-100"
+          style={{ width: '32px', height: '32px' }}
+        />
+      </div>
+
+      <div className="border-left-1 surface-border h-2rem mx-1"></div>
+
       <Button
         icon="pi pi-sign-out"
         label="Cerrar Sesión"
         onClick={logout}
-        className="p-button-text"
+        severity="danger"
+        text
+        className="p-button-sm font-bold px-2"
       />
     </div>
   );
 
   return (
-    <div className="min-h-screen surface-ground">
-      <div className="card shadow-2 mb-0 border-bottom-1 surface-border">
-        <Menubar model={menuItems} end={end} />
-      </div>
+    <div className="min-h-screen flex flex-column surface-ground">
+      <header className="sticky top-0 z-5 shadow-2 surface-card border-bottom-1 surface-border">
+        <Menubar model={menuItems} start={start} end={end} className="border-none px-4 py-2" />
+      </header>
       
-      <main className="p-4 fade-in">
+      <main className="flex-grow-1 p-4 md:p-5 fade-in max-w-screen-2xl mx-auto w-full">
         {children}
       </main>
 
-      <footer className="text-center py-4 text-secondary text-sm border-top-1 surface-border mt-4">
-        <p>© 2024 Serviteca Pro - Sistema de Gestión de Taller Mecánico</p>
+      <footer className="surface-card text-center py-4 text-secondary text-sm border-top-1 surface-border mt-auto">
+        <div className="flex flex-column md:flex-row justify-content-center align-items-center gap-2 md:gap-4">
+          <span>© 2024 <strong>Serviteca Pro</strong></span>
+          <span className="hidden md:inline">|</span>
+          <span>Sistema de Gestión de Taller Mecánico</span>
+          <span className="hidden md:inline">|</span>
+          <span className="text-xs">v1.0.0</span>
+        </div>
       </footer>
     </div>
   );

@@ -63,8 +63,13 @@
             },
             "url": {
               "raw": "{{base_url}}/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "login"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
             },
             "description": "Inicia sesión y obtiene un token JWT. El token se guarda automáticamente en la variable jwt_token."
           },
@@ -77,8 +82,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/auth/profile",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "profile"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
             },
             "description": "Obtiene la información del usuario autenticado, incluyendo rol y permisos."
           },
@@ -100,8 +110,13 @@
             },
             "url": {
               "raw": "{{base_url}}/auth/change-password",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "change-password"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
             },
             "description": "Cambia la contraseña del usuario autenticado."
           },
@@ -119,8 +134,12 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/clientes?page=1&limit=10",
-              "host": ["{{base_url}}"],
-              "path": ["clientes"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -148,8 +167,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/clientes/stats",
-              "host": ["{{base_url}}"],
-              "path": ["clientes", "stats"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "stats"
+              ]
             },
             "description": "Obtiene estadísticas de clientes (total, activos, etc.)."
           },
@@ -162,8 +186,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/clientes/1",
-              "host": ["{{base_url}}"],
-              "path": ["clientes", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "1"
+              ]
             },
             "description": "Obtiene un cliente específico por su ID."
           },
@@ -185,8 +214,12 @@
             },
             "url": {
               "raw": "{{base_url}}/clientes",
-              "host": ["{{base_url}}"],
-              "path": ["clientes"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes"
+              ]
             },
             "description": "Crea un nuevo cliente."
           },
@@ -208,8 +241,13 @@
             },
             "url": {
               "raw": "{{base_url}}/clientes/1",
-              "host": ["{{base_url}}"],
-              "path": ["clientes", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "1"
+              ]
             },
             "description": "Actualiza un cliente existente."
           },
@@ -222,8 +260,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/clientes/1",
-              "host": ["{{base_url}}"],
-              "path": ["clientes", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "1"
+              ]
             },
             "description": "Elimina un cliente (solo si no tiene órdenes asociadas)."
           },
@@ -241,8 +284,12 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/ordenes?page=1&limit=10",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -275,8 +322,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/ordenes/stats",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes", "stats"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes",
+                "stats"
+              ]
             },
             "description": "Obtiene estadísticas de órdenes (totales por estado, ingresos, etc.)."
           },
@@ -289,8 +341,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/ordenes/1",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes",
+                "1"
+              ]
             },
             "description": "Obtiene una orden específica con sus detalles."
           },
@@ -312,8 +369,12 @@
             },
             "url": {
               "raw": "{{base_url}}/ordenes",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes"
+              ]
             },
             "description": "Crea una nueva orden de trabajo con detalles."
           },
@@ -335,8 +396,13 @@
             },
             "url": {
               "raw": "{{base_url}}/ordenes/1",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes", "1"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes",
+                "1"
+              ]
             },
             "description": "Actualiza una orden existente."
           },
@@ -349,8 +415,14 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/ordenes/1/finalizar",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes", "1", "finalizar"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes",
+                "1",
+                "finalizar"
+              ]
             },
             "description": "Marca una orden como finalizada."
           },
@@ -363,12 +435,105 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/ordenes/1/anular",
-              "host": ["{{base_url}}"],
-              "path": ["ordenes", "1", "anular"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ordenes",
+                "1",
+                "anular"
+              ]
             },
             "description": "Anula una orden (solo si está en proceso)."
           },
           "response": []
+        }
+      ]
+    },
+    {
+      "name": "🚗 Vehículos",
+      "item": [
+        {
+          "name": "Listar Vehículos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos?page=1&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vehiculos"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear Vehículo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cli_codi\": 1,\n  \"placa\": \"TEST12\",\n  \"mr_codi\": 1,\n  \"li_codi\": 1,\n  \"modelo\": 2024,\n  \"color\": \"Negro\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vehiculos"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📦 Productos",
+      "item": [
+        {
+          "name": "Listar Productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/productos?page=1&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "productos"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
         }
       ]
     },
@@ -382,8 +547,12 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/health",
-              "host": ["{{base_url}}"],
-              "path": ["health"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ]
             },
             "description": "Verifica que la API esté funcionando correctamente."
           },

@@ -37,14 +37,11 @@ class AuthService {
    * Iniciar sesión
    */
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    console.log('AuthService.login llamado con:', { usuario: credentials.usuario });
     const response = await apiService.post<AuthResponse>('/auth/login', credentials);
-    console.log('Respuesta del login:', response);
     
-    if (response.token) {
-      localStorage.setItem(this.tokenKey, response.token);
-      localStorage.setItem(this.usuarioKey, JSON.stringify(response.usuario));
-      console.log('Token y usuario guardados en localStorage');
+    if (response.success && response.data.token) {
+      localStorage.setItem(this.tokenKey, response.data.token);
+      localStorage.setItem(this.usuarioKey, JSON.stringify(response.data.usuario));
     }
     
     return response;
@@ -106,7 +103,7 @@ class AuthService {
   /**
    * Verificar permisos para una opción
    */
-  hasPermission(opcionId: number, action: 'leer' | 'crear' | 'modificar' | 'borrar'): boolean {
+  hasPermission(_opcionId: number, _action: 'leer' | 'crear' | 'modificar' | 'borrar'): boolean {
     const usuario = this.getCurrentUser();
     if (!usuario?.roles) return false;
 

@@ -1,4 +1,4 @@
-import apiService from './api';
+import apiService, { ApiResponse } from './api';
 
 // Interfaces
 export interface Cliente {
@@ -40,20 +40,38 @@ export interface ClienteUpdate extends Partial<ClienteCreate> {
 }
 
 export interface FiltroCliente {
-  pagina?: number;
-  limite?: number;
-  busqueda?: string;
+  page?: number;
+  limit?: number;
+  limite?: number; // Compatibilidad temporal
+  search?: string;
   cod_tipdo?: number;
   ciu_codi?: number;
 }
 
-export interface ClientesResponse {
-  data: Cliente[];
-  total: number;
-  pagina: number;
-  limite: number;
-  totalPages: number;
+export interface PaginatedData<T> {
+  data: T[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
+
+export interface PaginatedResponse<T> {
+  success: boolean;
+  message: string;
+  data: T[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+export type ClientesResponse = PaginatedResponse<Cliente>;
+export type ClienteResponse = ApiResponse<Cliente>;
 
 class ClienteService {
   private endpoint = '/clientes';
@@ -64,9 +82,9 @@ class ClienteService {
   async getClientes(filtros?: FiltroCliente): Promise<ClientesResponse> {
     const params = new URLSearchParams();
     
-    if (filtros?.pagina) params.append('pagina', String(filtros.pagina));
-    if (filtros?.limite) params.append('limite', String(filtros.limite));
-    if (filtros?.busqueda) params.append('busqueda', filtros.busqueda);
+    if (filtros?.page) params.append('page', String(filtros.page));
+    if (filtros?.limit) params.append('limit', String(filtros.limit));
+    if (filtros?.search) params.append('search', filtros.search);
     if (filtros?.cod_tipdo) params.append('cod_tipdo', String(filtros.cod_tipdo));
     if (filtros?.ciu_codi) params.append('ciu_codi', String(filtros.ciu_codi));
 
@@ -76,16 +94,16 @@ class ClienteService {
   /**
    * Obtener cliente por ID
    */
-  async getClienteById(id: number): Promise<Cliente> {
-    return apiService.get<Cliente>(`${this.endpoint}/${id}`);
+  async getClienteById(id: number): Promise<ClienteResponse> {
+    return apiService.get<ClienteResponse>(`${this.endpoint}/${id}`);
   }
 
   /**
    * Obtener cliente por número de documento
    */
-  async getClienteByDocumento(codTipdo: number, numdoc: string): Promise<Cliente | null> {
+  async getClienteByDocumento(codTipdo: number, numdoc: string): Promise<ClienteResponse | null> {
     try {
-      return await apiService.get<Cliente>(`${this.endpoint}/documento/${codTipdo}/${numdoc}`);
+      return await apiService.get<ClienteResponse>(`${this.endpoint}/documento/${codTipdo}/${numdoc}`);
     } catch {
       return null;
     }
@@ -94,16 +112,16 @@ class ClienteService {
   /**
    * Crear nuevo cliente
    */
-  async createCliente(data: ClienteCreate): Promise<Cliente> {
-    return apiService.post<Cliente>(this.endpoint, data);
+  async createCliente(data: ClienteCreate): Promise<ClienteResponse> {
+    return apiService.post<ClienteResponse>(this.endpoint, data);
   }
 
   /**
    * Actualizar cliente
    */
-  async updateCliente(data: ClienteUpdate): Promise<Cliente> {
+  async updateCliente(data: ClienteUpdate): Promise<ClienteResponse> {
     const { cli_codi, ...rest } = data;
-    return apiService.put<Cliente>(`${this.endpoint}/${cli_codi}`, rest);
+    return apiService.put<ClienteResponse>(`${this.endpoint}/${cli_codi}`, rest);
   }
 
   /**
@@ -116,10 +134,10 @@ class ClienteService {
   /**
    * Buscar clientes por término (autocomplete)
    */
-  async searchClientes(term: string, limite?: number): Promise<Cliente[]> {
+  async searchClientes(term: string, limit?: number): Promise<Cliente[]> {
     const params = new URLSearchParams();
-    params.append('busqueda', term);
-    if (limite) params.append('limite', String(limite));
+    params.append('search', term);
+    if (limit) params.append('limit', String(limit));
     
     const response = await apiService.get<ClientesResponse>(`${this.endpoint}/search?${params.toString()}`);
     return response.data;
@@ -129,7 +147,7 @@ class ClienteService {
    * Obtener tipos de documento
    */
   async getTiposDocumento() {
-    return apiService.get<Array<{ td_codi: number; td_abreviado: string; td_nombre: string }>>(
+    return apiService.get<ApiResponse<Array<{ td_codi: number; td_abreviado: string; td_nombre: string }>>>(
       '/catalogos/tipos-documento'
     );
   }
@@ -139,7 +157,7 @@ class ClienteService {
    */
   async getCiudades(departamentoId?: number) {
     const params = departamentoId ? `?dep_codigo=${departamentoId}` : '';
-    return apiService.get<Array<{ ciu_codi: number; ciu_nombre: string; dep_codigo?: number }>>(
+    return apiService.get<ApiResponse<Array<{ ciu_codi: number; ciu_nombre: string; dep_codigo?: number }>>>(
       `/catalogos/ciudades${params}`
     );
   }

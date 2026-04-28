@@ -258,24 +258,27 @@ export class ClientesService {
       },
     });
 
-    const clientesPorTipoDocumento = await prisma.cliente.groupBy({
+    const counts = await prisma.cliente.groupBy({
       by: ['cod_tipdo'],
       _count: true,
-      include: {
-        tipoDocumento: {
-          select: {
-            td_abreviado: true,
-            td_nombre: true,
-          },
-        },
-      },
     });
+
+    const tiposDocumento = await prisma.tipoDocumento.findMany({
+      where: {
+        td_codi: { in: counts.map(c => c.cod_tipdo) }
+      }
+    });
+
+    const porTipoDocumento = counts.map(c => ({
+      ...c,
+      tipoDocumento: tiposDocumento.find(t => t.td_codi === c.cod_tipdo)
+    }));
 
     return {
       totalClientes,
       clientesConVehiculos,
       clientesSinVehiculos: totalClientes - clientesConVehiculos,
-      porTipoDocumento: clientesPorTipoDocumento,
+      porTipoDocumento,
     };
   }
 }

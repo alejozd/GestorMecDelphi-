@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -16,25 +16,26 @@ export default function Login() {
   const [error, setError] = useState<string>('');
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
+    mode: 'onChange',
+    defaultValues: {
+      usuario: '',
+      password: ''
+    }
   });
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data: LoginFormData) => {
     setLoading(true);
     setError('');
 
-    console.log('Intentando login con:', { usuario: data.usuario });
-
     try {
       await login(data.usuario, data.password);
-      console.log('Login exitoso, navegando al dashboard');
       navigate('/');
     } catch (err: unknown) {
-      console.error('Error en login:', err);
       if (err instanceof Error) {
         setError(err.message || 'Error al iniciar sesión');
       } else {
@@ -54,7 +55,11 @@ export default function Login() {
           <p className="text-secondary m-0">Gestión de Taller Mecánico</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-3">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-column gap-3"
+          noValidate
+        >
           {error && (
             <div className="error-message">
               <i className="pi pi-exclamation-circle"></i>
@@ -66,12 +71,18 @@ export default function Login() {
             <label htmlFor="usuario" className="block text-900 font-medium mb-2">
               Usuario
             </label>
-            <InputText
-              id="usuario"
-              placeholder="Ingrese su usuario"
-              className={`w-full ${errors.usuario ? 'p-invalid' : ''}`}
-              {...register('usuario')}
-              disabled={loading}
+            <Controller
+              name="usuario"
+              control={control}
+              render={({ field, fieldState }) => (
+                <InputText
+                  id={field.name}
+                  {...field}
+                  placeholder="Ingrese su usuario"
+                  className={`w-full ${fieldState.error ? 'p-invalid' : ''}`}
+                  disabled={loading}
+                />
+              )}
             />
             {errors.usuario && (
               <small className="error-text">{errors.usuario.message}</small>
@@ -82,15 +93,23 @@ export default function Login() {
             <label htmlFor="password" className="block text-900 font-medium mb-2">
               Contraseña
             </label>
-            <Password
-              id="password"
-              placeholder="Ingrese su contraseña"
-              className={`w-full ${errors.password ? 'p-invalid' : ''}`}
-              inputClassName="w-full"
-              toggleMask
-              feedback={false}
-              {...register('password')}
-              disabled={loading}
+            <Controller
+              name="password"
+              control={control}
+              render={({ field, fieldState }) => (
+                <Password
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  onBlur={field.onBlur}
+                  placeholder="Ingrese su contraseña"
+                  className={`w-full ${fieldState.error ? 'p-invalid' : ''}`}
+                  inputClassName="w-full"
+                  toggleMask
+                  feedback={false}
+                  disabled={loading}
+                />
+              )}
             />
             {errors.password && (
               <small className="error-text">{errors.password.message}</small>

@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { ordenesService } from '../services/ordenes.service.js';
-import { AuthRequest, ApiResponse, ClaseDocumento } from '../types/index.js';
+import { AuthRequest, ApiResponse, PaginatedResponse, ClaseDocumento } from '../types/index.js';
 
 /**
  * Controlador para gestión de Órdenes de Trabajo
@@ -10,7 +10,7 @@ export class OrdenesController {
    * Obtiene lista de órdenes con paginación y filtros
    * GET /api/ordenes?page=1&limit=10&estado=0&clase_doc=1
    */
-  async findAll(req: AuthRequest, res: Response<ApiResponse>) {
+  async findAll(req: AuthRequest, res: Response<PaginatedResponse | ApiResponse>) {
     try {
       const { page, limit, search, cli_codi, vxc_codi, estado, clase_doc, fecha_desde, fecha_hasta } = req.query;
 
