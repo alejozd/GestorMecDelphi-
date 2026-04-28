@@ -33,9 +33,9 @@ const VehiculoList: React.FC = () => {
     setLoading(true);
     try {
       const response = await vehiculoService.getVehiculos({
-        pagina: lazyParams.page,
-        limite: lazyParams.rows,
-        placa: lazyParams.filters.global.value
+        page: lazyParams.page,
+        limit: lazyParams.rows,
+        search: lazyParams.filters.global.value
       });
 
       if (response.success && response.data) {
@@ -119,10 +119,15 @@ const VehiculoList: React.FC = () => {
             header={header} responsiveLayout="scroll" className="custom-datatable"
             onRowClick={(e) => navigate(`/vehiculos/${e.data.vxc_codi}`)}
           >
-            <Column field="placa" header="Placa" body={(r) => <span className="placa-badge">{r.placa}</span>} />
-            <Column field="cliente.cli_nombre" header="Propietario" />
-            <Column field="marca.mr_nombre" header="Marca" />
-            <Column field="linea.li_nombre" header="Línea" />
+            <Column field="placa" header="Placa" body={(r) => <span className="placa-badge">{r.placa}</span>} sortable />
+            <Column field="cliente.cli_nombre" header="Propietario" body={(r) => (
+                <div className="flex flex-column">
+                    <span className="font-bold text-900">{r.cliente?.cli_nombre}</span>
+                    <small className="text-600">{r.cliente?.cli_numdoc}</small>
+                </div>
+            )} sortable />
+            <Column field="marca.mr_nombre" header="Marca" sortable />
+            <Column field="linea.li_nombre" header="Línea" sortable />
             <Column field="modelo" header="Modelo" />
             <Column body={actionTemplate} style={{ width: '8rem' }} />
           </DataTable>

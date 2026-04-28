@@ -8,6 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
+import { Dialog } from 'primereact/dialog';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { classNames } from 'primereact/utils';
@@ -37,21 +38,33 @@ const VehiculoForm: React.FC = () => {
   const [lineas, setLineas] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const [showMarcaDialog, setShowMarcaDialog] = useState(false);
+  const [newMarca, setNewMarca] = useState('');
+  const [showLineaDialog, setShowLineaDialog] = useState(false);
+  const [newLinea, setNewLinea] = useState('');
+
   const { control, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<VehiculoFormData>({
     resolver: zodResolver(vehiculoSchema),
   });
 
   const selectedMarca = watch('mr_codi');
 
+  const loadMarcas = async () => {
+    const res = await vehiculoService.getMarcas();
+    setMarcas(res as any);
+  };
+
+  const loadLineas = async (marcaId: number) => {
+    const res = await vehiculoService.getLineasPorMarca(marcaId);
+    setLineas(res as any);
+  };
+
   useEffect(() => {
     const init = async () => {
       try {
-        const [resClientes, resMarcas] = await Promise.all([
-          clienteService.getClientes({ limit: 100 }),
-          vehiculoService.getMarcas()
-        ]);
+        const resClientes = await clienteService.getClientes({ limit: 100 });
         setClientes(resClientes.data);
-        setMarcas(resMarcas as any);
+        await loadMarcas();
 
         const cliParam = searchParams.get('cliente');
         if (cliParam) setValue('cli_codi', parseInt(cliParam));
@@ -66,12 +79,33 @@ const VehiculoForm: React.FC = () => {
   }, [id, searchParams]);
 
   useEffect(() => {
-    if (selectedMarca) {
-      vehiculoService.getLineasPorMarca(selectedMarca).then(res => setLineas(res as any));
-    } else {
-      setLineas([]);
-    }
+    if (selectedMarca) loadLineas(selectedMarca);
+    else setLineas([]);
   }, [selectedMarca]);
+
+  const onAddMarca = async () => {
+    if (!newMarca) return;
+    try {
+        const res = await vehiculoService.createMarca(newMarca);
+        toast.current?.show({ severity: 'success', summary: 'Marca creada' });
+        await loadMarcas();
+        setValue('mr_codi', res.data.mr_codi);
+        setShowMarcaDialog(false);
+        setNewMarca('');
+    } catch (e: any) { toast.current?.show({ severity: 'error', detail: e.message }); }
+  };
+
+  const onAddLinea = async () => {
+    if (!newLinea || !selectedMarca) return;
+    try {
+        const res = await vehiculoService.createLinea(selectedMarca, newLinea);
+        toast.current?.show({ severity: 'success', summary: 'Línea creada' });
+        await loadLineas(selectedMarca);
+        setValue('li_codi', res.data.li_codi);
+        setShowLineaDialog(false);
+        setNewLinea('');
+    } catch (e: any) { toast.current?.show({ severity: 'error', detail: e.message }); }
+  };
 
   const onSubmit = async (data: VehiculoFormData) => {
     setLoading(true);
@@ -113,7 +147,10 @@ const VehiculoForm: React.FC = () => {
               {errors.placa && <small className="p-error ml-1">{errors.placa.message}</small>}
             </div>
             <div className="field">
-              <label>Marca <span className="text-red-500">*</span></label>
+              <div className="flex justify-content-between align-items-end mb-1">
+                <label className="mb-0">Marca <span className="text-red-500">*</span></label>
+                <Button type="button" icon="pi pi-plus" text className="p-0 h-1rem w-1rem" onClick={() => setShowMarcaDialog(true)} />
+              </div>
               <Controller name="mr_codi" control={control} render={({ field }) => (
                 <IconField iconPosition="left">
                   <InputIcon className="pi pi-car" />
@@ -123,7 +160,10 @@ const VehiculoForm: React.FC = () => {
               {errors.mr_codi && <small className="p-error ml-1">{errors.mr_codi.message}</small>}
             </div>
             <div className="field">
-              <label>Línea <span className="text-red-500">*</span></label>
+              <div className="flex justify-content-between align-items-end mb-1">
+                <label className="mb-0">Línea <span className="text-red-500">*</span></label>
+                <Button type="button" icon="pi pi-plus" text className="p-0 h-1rem w-1rem" disabled={!selectedMarca} onClick={() => setShowLineaDialog(true)} />
+              </div>
               <Controller name="li_codi" control={control} render={({ field }) => (
                 <IconField iconPosition="left">
                   <InputIcon className="pi pi-list" />
@@ -156,6 +196,22 @@ const VehiculoForm: React.FC = () => {
             <Button type="submit" label="Guardar" loading={loading} className="mt-4 w-full" />
           </form>
         </Card>
+
+        <Dialog header="Nueva Marca" visible={showMarcaDialog} onHide={() => setShowMarcaDialog(false)} style={{ width: '25rem' }}
+            footer={<Button label="Guardar" onClick={onAddMarca} />}>
+            <div className="p-fluid">
+                <label className="font-bold block mb-2">Nombre de la Marca</label>
+                <InputText value={newMarca} onChange={(e) => setNewMarca(e.target.value)} placeholder="Ej: Tesla" autoFocus />
+            </div>
+        </Dialog>
+
+        <Dialog header="Nueva Línea" visible={showLineaDialog} onHide={() => setShowLineaDialog(false)} style={{ width: '25rem' }}
+            footer={<Button label="Guardar" onClick={onAddLinea} />}>
+            <div className="p-fluid">
+                <label className="font-bold block mb-2">Nombre de la Línea</label>
+                <InputText value={newLinea} onChange={(e) => setNewLinea(e.target.value)} placeholder="Ej: Model Y" autoFocus />
+            </div>
+        </Dialog>
       </div>
     </Layout>
   );

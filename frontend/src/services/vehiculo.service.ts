@@ -44,8 +44,9 @@ export interface VehiculoUpdate extends Partial<VehiculoCreate> {
 }
 
 export interface FiltroVehiculo {
-  pagina?: number;
-  limite?: number;
+  page?: number;
+  limit?: number;
+  search?: string;
   placa?: string;
   cli_codi?: number;
   mr_codi?: number;
@@ -63,8 +64,9 @@ class VehiculoService {
   async getVehiculos(filtros?: FiltroVehiculo): Promise<VehiculosResponse> {
     const params = new URLSearchParams();
     
-    if (filtros?.pagina) params.append('pagina', String(filtros.pagina));
-    if (filtros?.limite) params.append('limite', String(filtros.limite));
+    if (filtros?.page) params.append('page', String(filtros.page));
+    if (filtros?.limit) params.append('limit', String(filtros.limit));
+    if (filtros?.search) params.append('search', filtros.search);
     if (filtros?.placa) params.append('placa', filtros.placa);
     if (filtros?.cli_codi) params.append('cli_codi', String(filtros.cli_codi));
     if (filtros?.mr_codi) params.append('mr_codi', String(filtros.mr_codi));
@@ -142,9 +144,17 @@ class VehiculoService {
    * Obtener líneas por marca
    */
   async getLineasPorMarca(mrCodi: number) {
-    return apiService.get<Array<{ li_codi: number; li_nombre: string; mr_codi: number }>>(
+    return apiService.get<ApiResponse<Array<{ li_codi: number; li_nombre: string; mr_codi: number }>>>(
       `/catalogos/lineas?mr_codi=${mrCodi}`
     );
+  }
+
+  async createMarca(nombre: string) {
+    return apiService.post<ApiResponse<any>>('/catalogos/marcas', { mr_nombre: nombre });
+  }
+
+  async createLinea(mrCodi: number, nombre: string) {
+    return apiService.post<ApiResponse<any>>('/catalogos/lineas', { mr_codi: mrCodi, li_nombre: nombre });
   }
 }
 

@@ -54,6 +54,34 @@ export class CatalogosController {
     }
   }
 
+  async createMarca(req: Request, res: Response<ApiResponse>) {
+    try {
+      const { mr_nombre } = req.body;
+      const marca = await prisma.marcaVehiculo.create({ data: { mr_nombre } });
+      res.status(201).json({ success: true, data: marca, message: 'Marca creada' });
+    } catch (error: any) {
+        if (error.code === 'P2002') {
+             res.status(400).json({ success: false, message: 'La marca ya existe' });
+             return;
+        }
+      res.status(500).json({ success: false, message: 'Error' });
+    }
+  }
+
+  async createLinea(req: Request, res: Response<ApiResponse>) {
+    try {
+      const { mr_codi, li_nombre } = req.body;
+      const linea = await prisma.lineaVehiculo.create({ data: { mr_codi, li_nombre } });
+      res.status(201).json({ success: true, data: linea, message: 'Línea creada' });
+    } catch (error: any) {
+        if (error.code === 'P2002') {
+             res.status(400).json({ success: false, message: 'La línea ya existe para esta marca' });
+             return;
+        }
+      res.status(500).json({ success: false, message: 'Error' });
+    }
+  }
+
   async getLineas(req: Request, res: Response<ApiResponse>) {
     try {
       const { mr_codi } = req.query;
