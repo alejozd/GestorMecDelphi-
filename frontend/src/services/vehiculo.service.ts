@@ -1,5 +1,5 @@
 import apiService, { ApiResponse } from './api';
-import { PaginatedData } from './cliente.service';
+import { PaginatedResponse } from './cliente.service';
 
 // Interfaces
 export interface Vehiculo {
@@ -52,7 +52,7 @@ export interface FiltroVehiculo {
   mr_codi?: number;
 }
 
-export type VehiculosResponse = ApiResponse<PaginatedData<Vehiculo>>;
+export type VehiculosResponse = PaginatedResponse<Vehiculo>;
 export type VehiculoResponse = ApiResponse<Vehiculo>;
 
 class VehiculoService {
@@ -97,9 +97,9 @@ class VehiculoService {
    */
   async getVehiculosPorCliente(cliCodi: number): Promise<Vehiculo[]> {
     const response = await apiService.get<VehiculosResponse>(
-      `${this.endpoint}?cli_codi=${cliCodi}&limite=100`
+      `${this.endpoint}?cli_codi=${cliCodi}&limit=100`
     );
-    return response.data.data;
+    return response.data;
   }
 
   /**
@@ -137,7 +137,7 @@ class VehiculoService {
    * Obtener marcas
    */
   async getMarcas() {
-    return apiService.get<Array<{ mr_codi: number; mr_nombre: string }>>('/catalogos/marcas');
+    return apiService.get<ApiResponse<Array<{ mr_codi: number; mr_nombre: string }>>>('/catalogos/marcas');
   }
 
   /**

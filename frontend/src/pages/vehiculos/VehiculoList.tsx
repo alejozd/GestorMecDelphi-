@@ -39,8 +39,8 @@ const VehiculoList: React.FC = () => {
       });
 
       if (response.success && response.data) {
-        setVehiculos(response.data.data);
-        setTotalRecords(response.data.pagination.total);
+        setVehiculos(response.data);
+        setTotalRecords(response.pagination.total);
       }
     } catch (error) {
       toast.current?.show({ severity: 'error', summary: 'Error', detail: 'Error cargando vehículos' });
